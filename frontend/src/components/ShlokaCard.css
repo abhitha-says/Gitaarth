@@ -1,0 +1,66 @@
+/* ═══ Shloka Card — Sacred Wisdom Vessel ═══ */
+.shloka-card {
+  background: linear-gradient(135deg, rgba(255,252,245,0.8) 0%, rgba(248,246,241,0.6) 100%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(198,146,43,0.15);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  position: relative;
+  overflow: hidden;
+  margin: var(--space-md) 0;
+  transition: all 0.3s var(--ease-out);
+  box-shadow: 0 2px 12px rgba(198,146,43,0.06);
+}
+
+.shloka-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(212,164,55,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.shloka-card:hover {
+  border-color: rgba(198,146,43,0.3);
+  box-shadow: 0 4px 20px rgba(198,146,43,0.1);
+}
+
+.shloka-card--compact { padding: 16px 18px }
+
+.shloka-card__ref { margin-bottom: var(--space-md) }
+
+.shloka-card__sanskrit {
+  font-family: var(--font-sanskrit);
+  font-size: 15px;
+  line-height: 2;
+  color: var(--navy);
+  margin: var(--space-md) 0;
+  white-space: pre-line;
+  padding: 8px 0;
+  border-top: 1px dashed rgba(198,146,43,0.15);
+  border-bottom: 1px dashed rgba(198,146,43,0.15);
+}
+
+.shloka-card__translation {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.shloka-card__bookmark {
+  position: absolute;
+  top: 14px; right: 14px;
+  color: var(--text-muted);
+  transition: all 0.25s var(--ease-out);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+}
+.shloka-card__bookmark:hover {
+  color: var(--gold);
+  background: var(--gold-glow);
+}

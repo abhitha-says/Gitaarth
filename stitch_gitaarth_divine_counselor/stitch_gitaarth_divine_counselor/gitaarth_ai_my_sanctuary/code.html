@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Personal Sanctuary - Gitaarth AI</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "outline": "#887364",
+                        "tertiary": "#77574d",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f2f0ed",
+                        "outline-variant": "#dbc2b0",
+                        "inverse-primary": "#ffb77a",
+                        "background": "#fbf9f5",
+                        "primary-container": "#ff9933",
+                        "on-tertiary-fixed": "#2c160e",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e4e2de",
+                        "error": "#ba1a1a",
+                        "surface-container": "#efeeea",
+                        "on-surface": "#1b1c1a",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#6d3a00",
+                        "tertiary-fixed": "#ffdbd0",
+                        "secondary-container": "#fed65b",
+                        "secondary": "#735c00",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "on-primary-container": "#693800",
+                        "secondary-fixed": "#ffe088",
+                        "primary-fixed": "#ffdcc2",
+                        "surface-tint": "#8f4e00",
+                        "on-primary-fixed": "#2e1500",
+                        "inverse-surface": "#30312e",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-container-highest": "#e4e2de",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary": "#8f4e00",
+                        "on-tertiary-container": "#5a3d34",
+                        "surface": "#fbf9f5",
+                        "on-surface-variant": "#554336",
+                        "primary-fixed-dim": "#ffb77a",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "tertiary-container": "#d0a99d",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-container-high": "#eae8e4",
+                        "surface-container-low": "#f5f3ef",
+                        "on-secondary-container": "#745c00",
+                        "surface-bright": "#fbf9f5",
+                        "surface-dim": "#dbdad6",
+                        "on-background": "#1b1c1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "container-max": "1200px",
+                        "gutter": "24px",
+                        "section-gap": "80px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "label-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Playfair Display"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "30px", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .divine-glow {
+            background: linear-gradient(135deg, #8f4e00 0%, #d0a99d 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased overflow-x-hidden">
+<!-- SideNavBar (Desktop Fixed) -->
+<aside class="hidden md:flex flex-col h-screen w-72 fixed left-0 top-0 bg-surface-container-low shadow-md border-r border-outline-variant/20 py-8 gap-2 z-40 transition-all duration-300 ease-in-out">
+<!-- Header -->
+<div class="px-6 mb-8 flex flex-col gap-1">
+<div aria-label="Divine Consciousness Avatar" class="w-12 h-12 rounded-full divine-glow mb-4 flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Gitaarth AI</h2>
+<p class="font-label-md text-label-md text-on-surface-variant font-normal">Modern Divine Counselor</p>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 mx-2 hover:bg-surface-variant/50 hover:text-primary rounded-full transition-colors font-title-lg text-title-lg" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+                Daily Verse
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 mx-2 hover:bg-surface-variant/50 hover:text-primary rounded-full transition-colors font-title-lg text-title-lg" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+                Sacred Chats
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 mx-2 hover:bg-surface-variant/50 hover:text-primary rounded-full transition-colors font-title-lg text-title-lg" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+                My Journey
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 mx-2 hover:bg-surface-variant/50 hover:text-primary rounded-full transition-colors font-title-lg text-title-lg" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+                Library
+            </a>
+<!-- Active State -->
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-full px-6 py-3 mx-2 font-title-lg text-title-lg" href="#">
+<span class="material-symbols-outlined filled-icon">spa</span>
+                Sanctuary
+            </a>
+</nav>
+<!-- CTA -->
+<div class="px-6 my-4">
+<button class="w-full divine-glow text-on-primary font-label-md text-label-md py-3 rounded-full shadow-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Begin New Guidance
+            </button>
+</div>
+<!-- Footer Tabs -->
+<div class="mt-auto flex flex-col gap-1 pt-4 border-t border-outline-variant/20 mx-6">
+<a class="flex items-center gap-4 text-on-surface-variant py-3 hover:text-primary transition-colors font-title-lg text-title-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant py-3 hover:text-primary transition-colors font-title-lg text-title-lg" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+                Support
+            </a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="md:ml-72 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface/90 backdrop-blur-md shadow-sm border-b border-outline-variant/30 docked full-width top-0 sticky z-30">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
+<!-- Mobile Logo (Hidden on desktop due to side nav having it, but keeping structure per JSON) -->
+<div class="font-headline-md text-headline-md text-primary tracking-tight md:hidden">
+                    Gitaarth AI
+                </div>
+<!-- Desktop Nav Links -->
+<nav class="hidden md:flex gap-8 items-center h-full">
+<a class="text-primary font-semibold border-b-2 border-primary pb-1 font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Sanctuary</a>
+<a class="text-on-surface-variant font-medium font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Wisdom Library</a>
+<a class="text-on-surface-variant font-medium font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Counselor</a>
+<a class="text-on-surface-variant font-medium font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Meditations</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4 text-primary">
+<button aria-label="Settings" class="p-2 hover:bg-surface-variant/50 rounded-full scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button aria-label="Account" class="p-2 hover:bg-surface-variant/50 rounded-full scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Dashboard Canvas -->
+<main class="flex-1 w-full px-margin-mobile md:px-margin-desktop py-section-gap max-w-container-max mx-auto flex flex-col gap-12">
+<!-- Welcome Header -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Your Digital Ashram</span>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface">Welcome back, Seeker.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-2">The path is clear today. Take a moment to reflect on your journey or seek new counsel from the divine wisdom.</p>
+</div>
+<button class="divine-glow text-on-primary font-label-md text-label-md px-8 py-4 rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+                    Begin New Guidance
+                </button>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Daily Reflection (Spans 8 cols) -->
+<article class="col-span-1 md:col-span-8 bg-surface-container shadow-[0_4px_30px_rgba(143,78,0,0.04)] rounded-xl p-8 border border-outline-variant/30 flex flex-col relative overflow-hidden group hover:border-secondary/50 transition-colors">
+<div class="absolute -bottom-20 -right-20 w-64 h-64 opacity-[0.03] text-primary pointer-events-none">
+<svg fill="currentColor" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 0 C60 30, 90 40, 100 50 C90 60, 60 70, 50 100 C40 70, 10 60, 0 50 C10 40, 40 30, 50 0 Z"></path>
+</svg>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary">wb_sunny</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">Daily Reflection</h3>
+</div>
+<div class="border-l-2 border-secondary/30 pl-6 py-2 my-4 flex-1 flex flex-col justify-center">
+<p class="font-headline-sm text-headline-sm text-on-surface leading-relaxed mb-4">
+                            "You have a right to perform your prescribed duty, but you are not entitled to the fruits of action. Never consider yourself the cause of the results of your activities, and never be attached to not doing your duty."
+                        </p>
+<div class="flex items-center gap-3 mt-auto">
+<span class="bg-[#FFF4E5] text-[#8f4e00] px-3 py-1 rounded-full font-label-md text-[12px]">Bhagavad Gita 2.47</span>
+<span class="bg-[#FFF4E5] text-[#8f4e00] px-3 py-1 rounded-full font-label-md text-[12px]">Karma Yoga</span>
+</div>
+</div>
+</article>
+<!-- Spiritual Progress Tracker (Spans 4 cols) -->
+<article class="col-span-1 md:col-span-4 bg-surface-container shadow-[0_4px_30px_rgba(143,78,0,0.04)] rounded-xl p-8 border border-outline-variant/30 flex flex-col items-center justify-center text-center relative hover:border-secondary/50 transition-colors">
+<h3 class="font-title-lg text-title-lg text-on-surface w-full text-left mb-6 absolute top-8 left-8">Inner Growth</h3>
+<div class="w-48 h-48 rounded-full overflow-hidden mb-6 border-4 border-surface shadow-sm mt-8 relative">
+<img alt="Growing Lotus" class="w-full h-full object-cover" data-alt="A highly detailed, serene digital illustration of a single golden lotus flower blooming slowly in a tranquil pool of water. The scene is illuminated by soft, heavenly light-mode lighting, emphasizing a warm, tactile gold and deep saffron color palette against a pristine, minimalist white background. The aesthetic is modern divine, blending ancient spiritual symbolism with high-end, clean UI art styling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAWkgjsgBHnG6whRlklGtLYUJI7JschS2TYC2HgU986CKUKBlDSGj-1EzEvgYmPRPBd3R-Wpc6gYsVOrfrujcE8YT1pJP8E79BssbzaRk4SnNMFJ73Afr_Ss3yBvOIf4OmoWENLYZfPNHHXFMKAmAmMKAR3beXl-2e-I2IIzP2QHIJ44v_ZsZMJYplyCU9P-WbEuxUF-foQ8kVrAc1ubr28x7xltzq3Ogzfbfh3R0qp20I1rBbE3z3u9CHVwP2aeN6KCTz-IF6lP1e"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary mb-2">Stage of Awakening</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Your consistent reflection is nourishing the seed of wisdom.</p>
+</article>
+<!-- Recent Conversations (Spans 6 cols) -->
+<article class="col-span-1 md:col-span-6 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">history</span>
+                            Recent Guidance
+                        </h3>
+<a class="text-secondary font-label-md text-label-md hover:underline decoration-secondary/30 underline-offset-4" href="#">View All</a>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Convo Item -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/20 flex items-start gap-4 hover:border-secondary/40 transition-colors cursor-pointer shadow-sm">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant shrink-0 mt-1">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-surface">Overcoming Workplace Anxiety</h4>
+<span class="text-[12px] text-on-surface-variant">Today</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-1">Exploring the concepts of detached action and maintaining inner peace during chaotic meetings.</p>
+</div>
+</div>
+<!-- Convo Item -->
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/20 flex items-start gap-4 hover:border-secondary/40 transition-colors cursor-pointer shadow-sm">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant shrink-0 mt-1">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-surface">Understanding Dharma</h4>
+<span class="text-[12px] text-on-surface-variant">Yesterday</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-1">A deep dive into aligning personal ambitions with universal duties and finding one's true path.</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Saved Verses Gallery (Spans 6 cols) -->
+<article class="col-span-1 md:col-span-6 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">bookmark</span>
+                            Saved Wisdom
+                        </h3>
+<a class="text-secondary font-label-md text-label-md hover:underline decoration-secondary/30 underline-offset-4" href="#">Gallery</a>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Verse Card -->
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 relative group hover:border-secondary/40 transition-all shadow-sm">
+<div class="absolute top-4 right-4 text-outline-variant group-hover:text-secondary transition-colors">
+<span class="material-symbols-outlined filled-icon text-[18px]">bookmark</span>
+</div>
+<span class="text-[10px] uppercase tracking-widest text-secondary font-bold mb-2 block">Gita 6.5</span>
+<p class="font-body-md text-[14px] text-on-surface line-clamp-3 mb-4">
+                                "One must elevate, not degrade, oneself by one's own mind. The mind is the friend of the conditioned soul, and his enemy as well."
+                            </p>
+</div>
+<!-- Verse Card -->
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 relative group hover:border-secondary/40 transition-all shadow-sm">
+<div class="absolute top-4 right-4 text-outline-variant group-hover:text-secondary transition-colors">
+<span class="material-symbols-outlined filled-icon text-[18px]">bookmark</span>
+</div>
+<span class="text-[10px] uppercase tracking-widest text-secondary font-bold mb-2 block">Gita 2.14</span>
+<p class="font-body-md text-[14px] text-on-surface line-clamp-3 mb-4">
+                                "O son of Kunti, the nonpermanent appearance of happiness and distress, and their disappearance in due course, are like the appearance and disappearance of winter and summer seasons."
+                            </p>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest w-full py-section-gap border-t border-outline-variant/50 mt-auto">
+<div class="flex flex-col items-center justify-center gap-gutter max-w-container-max mx-auto px-margin-mobile text-center">
+<div class="font-headline-sm text-headline-sm text-primary mb-4">Gitaarth AI</div>
+<div class="flex flex-wrap justify-center gap-6 mb-8">
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary underline decoration-primary/30 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Sacred Lineage</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary underline decoration-primary/30 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Sanctuary</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary underline decoration-primary/30 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Terms of Enlightenment</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary underline decoration-primary/30 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Contact Support</a>
+</div>
+<p class="text-tertiary font-body-md text-body-md">© 2024 Gitaarth AI. Modern Divine Wisdom for the Digital Age.</p>
+</div>
+</footer>
+</div>
+</body></html>

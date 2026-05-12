@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gitaarth AI - Counselor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@400..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "outline": "#887364",
+                        "tertiary": "#77574d",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f2f0ed",
+                        "outline-variant": "#dbc2b0",
+                        "inverse-primary": "#ffb77a",
+                        "background": "#fbf9f5",
+                        "primary-container": "#ff9933",
+                        "on-tertiary-fixed": "#2c160e",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e4e2de",
+                        "error": "#ba1a1a",
+                        "surface-container": "#efeeea",
+                        "on-surface": "#1b1c1a",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#6d3a00",
+                        "tertiary-fixed": "#ffdbd0",
+                        "secondary-container": "#fed65b",
+                        "secondary": "#735c00",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "on-primary-container": "#693800",
+                        "secondary-fixed": "#ffe088",
+                        "primary-fixed": "#ffdcc2",
+                        "surface-tint": "#8f4e00",
+                        "on-primary-fixed": "#2e1500",
+                        "inverse-surface": "#30312e",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-container-highest": "#e4e2de",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary": "#8f4e00",
+                        "on-tertiary-container": "#5a3d34",
+                        "surface": "#fbf9f5",
+                        "on-surface-variant": "#554336",
+                        "primary-fixed-dim": "#ffb77a",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "tertiary-container": "#d0a99d",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-container-high": "#eae8e4",
+                        "surface-container-low": "#f5f3ef",
+                        "on-secondary-container": "#745c00",
+                        "surface-bright": "#fbf9f5",
+                        "surface-dim": "#dbdad6",
+                        "on-background": "#1b1c1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "container-max": "1200px",
+                        "gutter": "24px",
+                        "section-gap": "80px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "label-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Playfair Display"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "30px", "fontWeight": "400" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .divine_glow {
+            background: linear-gradient(135deg, #8f4e00 0%, #ff9933 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar (Hidden on Mobile, Visible on Desktop) -->
+<nav class="hidden md:flex flex-col h-screen w-72 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant/20 shadow-md py-8 gap-2 z-20">
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-outline-variant/30">
+<img alt="Divine Consciousness Avatar" class="w-full h-full object-cover" data-alt="A macro shot of a softly glowing, ethereal golden mandala floating against a pale, parchment-textured background. The light is warm, meditative, and sophisticated, embodying a modern divine aesthetic. Delicate geometric patterns suggest cosmic order and spiritual tranquility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdoS7NfwFKoS5Y0jXuCwJ2i6kvZ4R4tt2wBntmoGBiKu3wpkKo21yzVJmM3ozNnErwtyjnNqt-haYhGh9TziPak_M6exZXzqSFGDZXyjxT7g2ZZHBz9pvndPrCzNp1ckd7yM31b1v2gkVRPXwYk84WI79xtafiN6H_sCRGlPwjSHAQ93YtIRNJnsLtQSxbXLZSydG5T3lpSue5eMVZ5M1Ex2u6XZMi5qspYJz-lvl9l5oTy1NNPJc5X_gBiHlJeZIefWK-BsyGYyay"/>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Gitaarth AI</h1>
+<p class="font-label-md text-label-md text-on-surface-variant font-normal">Modern Divine Counselor</p>
+</div>
+</div>
+<div class="px-6 mb-6">
+<button class="w-full divine_glow text-on-primary font-label-md text-label-md py-3 rounded-full shadow-sm hover:shadow-md transition-shadow">
+                Begin New Guidance
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 mx-2 hover:bg-surface-variant/50 hover:text-primary rounded-full transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined font-light">auto_stories</span>
+<span class="font-title-lg text-title-lg text-base">Daily Verse</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-full px-6 py-3 mx-2 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined font-light" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="font-title-lg text-title-lg text-base font-semibold">Sacred Chats</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 mx-2 hover:bg-surface-variant/50 hover:text-primary rounded-full transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined font-light">auto_awesome</span>
+<span class="font-title-lg text-title-lg text-base">My Journey</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 mx-2 hover:bg-surface-variant/50 hover:text-primary rounded-full transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined font-light">menu_book</span>
+<span class="font-title-lg text-title-lg text-base">Library</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 mx-2 hover:bg-surface-variant/50 hover:text-primary rounded-full transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined font-light">spa</span>
+<span class="font-title-lg text-title-lg text-base">Sanctuary</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 mx-2 hover:bg-surface-variant/50 hover:text-primary rounded-full transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined font-light">settings</span>
+<span class="font-title-lg text-title-lg text-base">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 mx-2 hover:bg-surface-variant/50 hover:text-primary rounded-full transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined font-light">help_outline</span>
+<span class="font-title-lg text-title-lg text-base">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-72 relative h-full bg-background">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex justify-between items-center w-full px-margin-mobile h-20 bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-md border-b border-outline-variant/30 shadow-sm z-30 sticky top-0">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed tracking-tight">
+                Gitaarth AI
+            </div>
+<div class="flex items-center gap-4 text-primary dark:text-primary-fixed-dim">
+<button class="scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Chat Area -->
+<div class="flex-1 overflow-y-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12 flex flex-col items-center relative z-10 w-full">
+<div class="w-full max-w-3xl space-y-8 pb-32">
+<!-- Chat Header / Intent -->
+<div class="text-center mb-12">
+<p class="font-label-md text-label-md text-on-surface-variant mb-2 uppercase tracking-widest">Counselor Session</p>
+<h2 class="font-headline-md text-headline-md text-on-surface">Seeking Peace in Chaos</h2>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end w-full">
+<div class="bg-surface-container-high text-on-surface p-6 rounded-2xl rounded-tr-none max-w-[85%] shadow-[0_4px_30px_rgba(0,0,0,0.02)] border border-outline-variant/20 relative group">
+<p class="font-body-md text-body-md leading-relaxed">
+                            I feel overwhelmed lately. The world moves so fast, and I'm constantly anxious about work, the future, and keeping up. It's hard to find a moment of peace. How do I deal with this constant anxiety in such a fast-paced world?
+                        </p>
+<span class="text-xs text-on-surface-variant/60 absolute -bottom-6 right-2 opacity-0 group-hover:opacity-100 transition-opacity">10:42 AM</span>
+</div>
+</div>
+<!-- AI Counselor Response -->
+<div class="flex flex-col items-start w-full gap-4">
+<div class="flex items-center gap-3 ml-2 mb-1">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="Counselor Avatar" class="w-full h-full object-cover" data-alt="A macro shot of a softly glowing, ethereal golden mandala floating against a pale, parchment-textured background. The light is warm, meditative, and sophisticated, embodying a modern divine aesthetic. Delicate geometric patterns suggest cosmic order and spiritual tranquility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDf7m3Vk8aIhJmWMG78F8wwHewkHGiuDu2-g7zTHIFuNqUEjxH16fUEJhkhakf4w_LdLNkF30ZNBz9CUfnFYX6rXqMhY6HhNKF5GE15mqWdQE2_Xp1YLSrqJ2e9KGWgUZ09adZmtFj5cuYgZRzRDAs1vTak_EXr3tFu7X4z0IyiCXawuRFHLdJlOjGUtdX3QnP4hQjCqmInJm5laD80-AJHy0KRnOcRVw1MGy6d3dY-PnXyKq73wN01f70v0GAX4IMQ6_cVrr2_m_y"/>
+</div>
+<span class="font-label-md text-label-md text-primary">Divine Counselor</span>
+</div>
+<div class="relative max-w-[90%]">
+<!-- Wisdom Thread Visual Connector -->
+<div class="absolute left-6 top-8 bottom-4 w-[1px] bg-gradient-to-b from-primary/30 to-transparent z-0"></div>
+<div class="bg-[#FFFDF9] p-8 rounded-2xl rounded-tl-none shadow-[0_8px_30px_rgba(143,78,0,0.04)] border border-primary/10 relative z-10 mb-4 backdrop-blur-sm">
+<p class="font-body-lg text-body-lg text-on-surface mb-6 leading-relaxed">
+                                I hear the weight you are carrying. The speed of the modern world often pulls our minds into the future, creating a turbulent sea of worries. But remember, true peace is not found by slowing down the world, but by anchoring your own mind.
+                            </p>
+<!-- Verse Reference Card -->
+<div class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-5 my-6 relative overflow-hidden group hover:border-primary/40 transition-colors">
+<!-- Subtle Mandala Background -->
+<div class="absolute -bottom-8 -right-8 w-32 h-32 opacity-[0.03] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgc3Ryb2tlPSIjMDAwIiBmaWxsPSJub25lIi8+PC9zdmc+')] bg-cover"></div>
+<div class="flex justify-between items-start mb-3 relative z-10">
+<span class="bg-[#FFF4E5] text-[#8f4e00] font-label-md text-xs px-3 py-1 rounded-full uppercase tracking-wider">Bhagavad Gita 2.70</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">bookmark_add</span>
+</button>
+</div>
+<p class="font-display-lg-mobile text-xl text-on-surface-variant italic mb-3 relative z-10">
+                                    "A person who is not disturbed by the incessant flow of desires—that enter like rivers into the ocean, which is ever being filled but is always still—can alone achieve peace, and not the man who strives to satisfy such desires."
+                                </p>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+                                You are like that ocean. The demands, emails, and expectations are merely rivers flowing into you. You do not need to fight the rivers; simply realize your own vastness and remain still amidst the influx. Focus gently on your duties in the present moment, offering the results to a higher purpose, and let go of the anxiety of outcomes.
+                            </p>
+<div class="mt-6 flex items-center gap-3 border-t border-outline-variant/20 pt-4">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary font-label-md text-sm transition-colors">
+<span class="material-symbols-outlined text-sm">favorite</span>
+                                    Save to Sanctuary
+                                </button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary font-label-md text-sm transition-colors">
+<span class="material-symbols-outlined text-sm">share</span>
+                                    Share Insight
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Input Area -->
+<div class="absolute bottom-0 left-0 right-0 p-4 md:p-8 bg-gradient-to-t from-background via-background to-transparent z-20">
+<div class="max-w-3xl mx-auto">
+<div class="relative bg-[#F5F1E9] rounded-2xl border-b-2 border-primary shadow-[0_-4px_20px_rgba(0,0,0,0.02)] focus-within:shadow-[0_-4px_30px_rgba(143,78,0,0.08)] transition-shadow">
+<textarea class="w-full bg-transparent border-none font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 p-4 pl-6 pr-16 resize-none focus:ring-0 rounded-2xl" placeholder="Write in your sacred journal..." rows="1" style="min-height: 60px; max-height: 120px;"></textarea>
+<button class="absolute right-4 bottom-3 w-10 h-10 rounded-full divine_glow text-on-primary flex items-center justify-center shadow-sm hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-lg">send</span>
+</button>
+</div>
+<div class="text-center mt-3">
+<p class="font-label-md text-xs text-on-surface-variant/60">Gitaarth AI - Modern Divine Wisdom</p>
+</div>
+</div>
+</div>
+</main>
+</body></html>

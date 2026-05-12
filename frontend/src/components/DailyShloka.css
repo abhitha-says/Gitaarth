@@ -1,0 +1,36 @@
+/* ═══ Daily Shloka — Premium Light ═══ */
+.daily-shloka {
+  position: relative; padding: var(--space-2xl);
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  max-width: 680px; margin: 0 auto; overflow: hidden;
+}
+
+.daily-shloka::after {
+  content: ''; position: absolute; top: -60%; right: -30%;
+  width: 250px; height: 250px; border-radius: 50%;
+  background: radial-gradient(circle, var(--gold-glow), transparent);
+  pointer-events: none;
+}
+
+.daily-shloka__header { display: flex; align-items: center; gap: 10px; margin-bottom: var(--space-lg) }
+.daily-shloka__icon { color: var(--gold) }
+.daily-shloka__label { font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold) }
+
+.daily-shloka__sanskrit { text-align: center; padding: var(--space-lg) 0; white-space: pre-line; font-size: 18px; line-height: 2; color: var(--navy) }
+
+.daily-shloka__divider { display: flex; align-items: center; justify-content: center; margin: var(--space-lg) 0 }
+.daily-shloka__divider::before, .daily-shloka__divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent) }
+.daily-shloka__om { padding: 0 var(--space-md); font-family: var(--font-sanskrit); font-size: 24px; color: var(--gold); animation: sacredPulse 4s ease-in-out infinite }
+
+.daily-shloka__translation { font-size: 15px; line-height: 1.8; color: var(--text-secondary); text-align: center; font-style: italic; font-family: var(--font-display); padding: 0 var(--space-sm) }
+
+.daily-shloka__footer { display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border) }
+.daily-shloka__ref { font-size: 12px; color: var(--text-muted); font-weight: 500 }
+
+.daily-shloka__share { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--text-muted); transition: all var(--transition-fast) }
+.daily-shloka__share:hover { background: var(--gold-glow); color: var(--gold) }
+
+@media (max-width: 768px) { .daily-shloka { padding: var(--space-xl) } }

@@ -1,0 +1,205 @@
+/* ═══ Library Page ═══ */
+.library {
+  padding: 100px 0 var(--space-4xl);
+  min-height: 100vh;
+}
+
+.library__header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.library__title {
+  margin-bottom: var(--space-sm);
+}
+
+.library__subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Search */
+.library__search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: var(--radius-lg);
+  max-width: 600px;
+  margin: 0 auto var(--space-2xl);
+  transition: all var(--transition-fast);
+}
+
+.library__search:focus-within {
+  border-color: var(--border-gold) !important;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.08);
+}
+
+.library__search-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.library__search-input {
+  flex: 1;
+  font-size: 0.92rem;
+}
+
+.library__search-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Stats */
+.library__stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-3xl);
+}
+
+.library__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-md) var(--space-xl);
+}
+
+.library__stat-num {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.library__stat-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Chapters */
+.library__chapters {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.library__section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  margin-bottom: var(--space-lg);
+  color: var(--divine-gold);
+}
+
+/* Chapter Card */
+.chapter-card {
+  margin-bottom: var(--space-sm);
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.chapter-card--expanded {
+  box-shadow: var(--shadow-glow-gold);
+  border-color: rgba(255, 215, 0, 0.15) !important;
+}
+
+.chapter-card__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  text-align: left;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.chapter-card__header:hover {
+  background: var(--surface-glass);
+}
+
+.chapter-card__num {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--divine-gold);
+  flex-shrink: 0;
+}
+
+.chapter-card__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chapter-card__name {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.chapter-card__sanskrit {
+  font-family: var(--font-sanskrit);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.chapter-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+}
+
+.chapter-card__verses {
+  font-size: 0.78rem;
+}
+
+.chapter-card__content {
+  padding: 0 var(--space-lg) var(--space-lg);
+  animation: fadeInUp 0.3s var(--ease-out);
+}
+
+.chapter-card__empty {
+  padding: var(--space-lg);
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .library {
+    padding: 80px 0 var(--space-3xl);
+  }
+
+  .library__stats {
+    gap: var(--space-sm);
+  }
+
+  .library__stat {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .library__stat-num {
+    font-size: 1.4rem;
+  }
+
+  .chapter-card__header {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .chapter-card__content {
+    padding: 0 var(--space-md) var(--space-md);
+  }
+}

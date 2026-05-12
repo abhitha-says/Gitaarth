@@ -1,0 +1,174 @@
+/* ═══ Chat Bubbles — Premium Divine Light ═══ */
+
+/* ── User Bubble ── */
+.chat-bubble--user {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  animation: fadeInUp 0.4s var(--ease-out) forwards;
+}
+
+.chat-bubble__user-content {
+  max-width: 80%;
+  background: linear-gradient(135deg, rgba(198,146,43,0.1) 0%, rgba(212,164,55,0.06) 100%);
+  border: 1px solid rgba(198,146,43,0.15);
+  border-radius: 20px 4px 20px 20px;
+  padding: 16px 20px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--navy);
+  box-shadow: 0 2px 8px rgba(198,146,43,0.06);
+}
+
+/* ── AI Bubble ── */
+.chat-bubble--ai {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  animation: fadeInUp 0.5s var(--ease-out) forwards;
+}
+
+/* AI Header */
+.chat-bubble__ai-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-bubble__avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--gold);
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(198,146,43,0.12);
+}
+.chat-bubble__avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.chat-bubble__label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+/* AI Body — Wisdom Thread */
+.chat-bubble__ai-body {
+  display: flex;
+  gap: 16px;
+  padding-left: 4px;
+}
+
+.chat-bubble__wisdom-thread {
+  width: 2.5px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg,
+    var(--gold) 0%,
+    rgba(198,146,43,0.3) 60%,
+    transparent 100%
+  );
+  border-radius: var(--radius-full);
+  min-height: 40px;
+}
+
+.chat-bubble__ai-content {
+  flex: 1;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(17,24,39,0.05);
+  border-radius: 4px 20px 20px 20px;
+  padding: 18px 22px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+.chat-bubble__text {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+/* Counseling section */
+.chat-bubble__counseling {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-family: var(--font-display);
+}
+
+/* Action Buttons */
+.chat-bubble__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(17,24,39,0.04);
+}
+
+.chat-bubble__action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: rgba(248,246,241,0.6);
+  border: 1px solid rgba(17,24,39,0.05);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+  letter-spacing: 0.02em;
+}
+.chat-bubble__action-btn .material-symbols-outlined {
+  font-size: 16px;
+}
+.chat-bubble__action-btn:hover {
+  background: var(--gold-glow);
+  color: var(--gold);
+  border-color: rgba(198,146,43,0.2);
+  box-shadow: 0 2px 8px rgba(198,146,43,0.08);
+}
+
+/* ── Thread structure (legacy compat) ── */
+.chat-bubble__thread {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.chat-bubble__wisdom-line {
+  width: 2px;
+  flex: 1;
+  min-height: 20px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  border-radius: var(--radius-full);
+}
+.chat-bubble__content {
+  flex: 1;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(17,24,39,0.05);
+  border-radius: 4px 20px 20px 20px;
+  padding: 18px 22px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .chat-bubble__user-content { max-width: 90%; padding: 14px 16px; }
+  .chat-bubble__ai-content { padding: 14px 16px; }
+  .chat-bubble__action-btn { padding: 5px 10px; font-size: 11px; }
+}
