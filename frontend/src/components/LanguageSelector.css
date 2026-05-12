@@ -1,315 +1,444 @@
-/* ═══ Language Selector — Divine Gateway ═══ */
+/* ═══════════════════════════════════════════════════════════════
+   LANGUAGE SELECTOR — Divine Vishwaroop Gateway
+   Luxury Spiritual Celestial UI — Refined & Balanced
+   ═══════════════════════════════════════════════════════════════ */
 
-/* ── Overlay ── */
+/* ── Full-screen Overlay ── */
 .lang-overlay {
   position: fixed;
   inset: 0;
-  z-index: var(--z-modal);
+  z-index: var(--z-modal, 100);
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    radial-gradient(ellipse 120% 80% at 50% 30%, rgba(212, 164, 55, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 100% at 80% 80%, rgba(198, 146, 43, 0.05) 0%, transparent 50%),
-    linear-gradient(175deg, #FDFBF7 0%, #F8F6F2 30%, #F5F0E8 60%, #FAF8F4 100%);
+  background: #F8F6F2;
   overflow: hidden;
 }
 
-/* ── Particles ── */
-.lang-particles {
+/* ═══ DIVINE BACKGROUND SCENE ═══ */
+.lang-bg-scene {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
+  overflow: hidden;
 }
 
-.lang-particle {
+/* ── Background Image: fullscreen, as-is ── */
+.lang-bg-image {
   position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 164, 55, 0.7) 0%, rgba(198, 146, 43, 0.2) 60%, transparent 100%);
-  box-shadow: 0 0 6px rgba(212, 164, 55, 0.3);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
   opacity: 0;
-  animation: langParticle ease-in-out infinite;
+  animation: bgReveal 2s 0.3s ease-out forwards;
 }
 
-@keyframes langParticle {
-
-  0%,
-  100% {
-    transform: translateY(0) scale(0.6);
+@keyframes bgReveal {
+  0% {
     opacity: 0;
+    transform: scale(1.02);
   }
-
-  25% {
-    opacity: 0.7;
-  }
-
-  50% {
-    transform: translateY(-60px) scale(1.2);
-    opacity: 0.4;
-  }
-
-  75% {
-    opacity: 0.5;
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-/* ── Glow orbs ── */
+/* ── Soft overlays for card readability ── */
+
+.lang-bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    /* Top edge subtle fade */
+    linear-gradient(180deg, rgba(248,246,242,0.3) 0%, transparent 20%),
+    /* Bottom edge subtle fade */
+    linear-gradient(0deg, rgba(248,246,242,0.4) 0%, transparent 15%);
+}
+
+/* Center soft haze — ensures card area is readable */
+.lang-bg-overlay-center {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse 42% 55% at 50% 48%, rgba(255,255,255,0.4) 0%, rgba(248,246,242,0.12) 50%, transparent 72%);
+}
+
+/* ═══ ATMOSPHERIC GLOW ORBS (toned way down) ═══ */
 .lang-glow {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  z-index: 2;
+  filter: blur(120px);
+}
+
+.lang-glow--topleft {
+  width: 400px;
+  height: 400px;
+  top: -8%;
+  left: -5%;
+  background: radial-gradient(circle, rgba(212,164,55,0.06) 0%, transparent 70%);
+}
+
+.lang-glow--topright {
+  width: 450px;
+  height: 450px;
+  top: -12%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(255,240,210,0.08) 0%, transparent 65%);
+}
+
+.lang-glow--bottom {
+  width: 500px;
+  height: 300px;
+  bottom: -8%;
+  left: 35%;
+  background: radial-gradient(circle, rgba(198,146,43,0.04) 0%, transparent 60%);
+}
+
+/* ═══ FLOATING PARTICLES (softer, smaller) ═══ */
+.lang-particles-container {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.lang-floating-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,164,55,0.5) 0%, rgba(255,240,210,0.15) 60%, transparent 100%);
+  box-shadow: 0 0 4px rgba(212,164,55,0.2);
+}
+
+/* ═══ SANSKRIT GLOW SECTION — large, visible, left side ═══ */
+.lang-sanskrit-section {
+  position: absolute;
+  left: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+  max-width: 30%;
+}
+
+.lang-sanskrit-geometry {
+  position: absolute;
+  inset: -70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,164,55,0.04) 0%, transparent 55%);
+  border: 1px solid rgba(198,146,43,0.06);
+  animation: geometryPulse 10s ease-in-out infinite;
+}
+
+@keyframes geometryPulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.03); opacity: 0.55; }
+}
+
+.lang-sanskrit-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: 'Noto Sans Devanagari', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: rgba(190,152,60,0.28);
+  line-height: 1.7;
+  text-align: left;
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.lang-sanskrit-text span {
+  display: block;
+  white-space: nowrap;
+}
+
+/* ═══ CENTER GLASS CARD ═══ */
+.lang-card-container {
+  position: relative;
+  z-index: 10;
+}
+
+.lang-modal {
+  position: relative;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(60px) saturate(1.3);
+  -webkit-backdrop-filter: blur(60px) saturate(1.3);
+  border: 1px solid rgba(198,146,43,0.08);
+  border-radius: 40px;
+  padding: 52px 56px 44px;
+  max-width: 520px;
+  width: 92vw;
+  text-align: center;
+  box-shadow:
+    0 32px 100px rgba(0, 0, 0, 0.05),
+    0 12px 48px rgba(198,146,43,0.06),
+    0 4px 16px rgba(0,0,0,0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(198,146,43,0.03);
+  overflow: hidden;
+}
+
+.lang-modal__inner-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 30%, rgba(255,248,230,0.15) 0%, transparent 50%);
+  pointer-events: none;
   z-index: 0;
 }
 
-.lang-glow--1 {
-  width: 600px;
-  height: 600px;
-  top: -15%;
-  right: -10%;
-  background: radial-gradient(circle, rgba(212, 164, 55, 0.1) 0%, transparent 65%);
-  filter: blur(80px);
-  animation: bgFloat 16s ease-in-out infinite;
-}
-
-.lang-glow--2 {
-  width: 500px;
-  height: 500px;
-  bottom: -10%;
-  left: -8%;
-  background: radial-gradient(circle, rgba(198, 146, 43, 0.07) 0%, transparent 60%);
-  filter: blur(90px);
-  animation: bgFloat 20s 4s ease-in-out infinite;
-}
-
-.lang-glow--3 {
-  width: 400px;
-  height: 400px;
-  top: 40%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(255, 240, 210, 0.12) 0%, transparent 55%);
-  filter: blur(100px);
-  animation: bgBreathe 12s ease-in-out infinite;
-}
-
-/* ── Modal Card ── */
-.lang-modal {
-  position: relative;
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgba(198, 146, 43, 0.12);
-  border-radius: 32px;
-  padding: 48px 52px 40px;
-  max-width: 480px;
-  width: 92%;
-  text-align: center;
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.06),
-    0 8px 32px rgba(198, 146, 43, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  animation: fadeInUp 0.6s var(--ease-out) forwards;
-}
-
-/* ── Sacred Om ── */
+/* ═══ SACRED OM SYMBOL ═══ */
 .lang-modal__sacred {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
+  z-index: 1;
+  width: 72px;
+  height: 72px;
 }
 
 .lang-modal__om {
-  font-family: var(--font-sanskrit);
-  font-size: 48px;
-  color: var(--gold);
+  font-family: 'Noto Sans Devanagari', serif;
+  font-size: 42px;
+  color: #C6922B;
   z-index: 1;
-  animation: sacredPulse 4s ease-in-out infinite;
-  text-shadow: 0 0 30px rgba(212, 164, 55, 0.2);
+  line-height: 1;
 }
 
 .lang-modal__ring {
   position: absolute;
-  inset: -12px;
+  inset: -4px;
   border-radius: 50%;
-  border: 1.5px solid rgba(198, 146, 43, 0.15);
-  animation: gentleSpin 20s linear infinite;
+  border: 1.5px solid rgba(198,146,43,0.18);
 }
 
 .lang-modal__ring::before {
   content: '';
   position: absolute;
-  top: -2px;
+  top: -3px;
   left: 50%;
-  width: 4px;
-  height: 4px;
-  background: var(--gold);
+  width: 5px;
+  height: 5px;
+  background: #C6922B;
   border-radius: 50%;
   transform: translateX(-50%);
-  box-shadow: 0 0 8px rgba(212, 164, 55, 0.5);
+  box-shadow: 0 0 8px rgba(212,164,55,0.4);
 }
 
-/* ── Greeting ── */
+/* ═══ GREETING TEXT ═══ */
 .lang-modal__greeting {
-  font-family: var(--font-display);
-  font-size: 16px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 17px;
   font-style: italic;
-  color: var(--gold);
+  color: #C6922B;
   letter-spacing: 0.04em;
   margin-bottom: 6px;
-  opacity: 0;
-  animation: fadeIn 0.8s 0.3s var(--ease-out) forwards;
+  position: relative;
+  z-index: 1;
 }
 
-/* ── Title ── */
+/* ═══ MAIN TITLE ═══ */
 .lang-modal__title {
-  font-family: var(--font-display);
-  font-size: 32px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 34px;
   font-weight: 400;
-  color: var(--navy);
-  margin-bottom: 8px;
+  color: #111827;
+  margin-bottom: 10px;
   letter-spacing: -0.01em;
-  opacity: 0;
-  animation: fadeInUp 0.6s 0.2s var(--ease-out) forwards;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
 }
 
-/* ── Description ── */
+/* ═══ DESCRIPTION ═══ */
 .lang-modal__desc {
+  font-family: 'Inter', -apple-system, sans-serif;
   font-size: 15px;
-  line-height: 1.7;
-  color: var(--text-secondary);
+  line-height: 1.75;
+  color: #6B7280;
   margin-bottom: 32px;
-  opacity: 0;
-  animation: fadeIn 0.8s 0.4s var(--ease-out) forwards;
+  position: relative;
+  z-index: 1;
 }
 
-/* ── Language Grid ── */
+/* ═══ LANGUAGE GRID ═══ */
 .lang-grid {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  position: relative;
+  z-index: 1;
 }
 
-.lang-card {
+/* ═══ LANGUAGE BUTTONS ═══ */
+.lang-btn {
   position: relative;
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 18px 22px;
-  background: rgba(248, 246, 241, 0.6);
-  border: 1.5px solid rgba(17, 24, 39, 0.06);
-  border-radius: 18px;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1.5px solid rgba(17,24,39,0.06);
+  border-radius: 20px;
   cursor: pointer;
-  transition: all 0.35s var(--ease-out);
   text-align: left;
   overflow: hidden;
-  opacity: 0;
-  animation: fadeInUp 0.5s var(--ease-out) forwards;
+  transition:
+    border-color 0.4s ease,
+    background 0.4s ease;
+  font-family: 'Inter', -apple-system, sans-serif;
 }
 
-.lang-card:nth-child(1) {
-  animation-delay: 0.5s;
-}
-
-.lang-card:nth-child(2) {
-  animation-delay: 0.65s;
-}
-
-.lang-card__glow {
+.lang-btn__glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 50%, rgba(212, 164, 55, 0.08) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 20% 50%, rgba(212,164,55,0.07) 0%, transparent 70%);
   opacity: 0;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
-.lang-card:hover {
-  border-color: rgba(198, 146, 43, 0.3);
-  background: rgba(255, 252, 245, 0.9);
-  box-shadow: 0 8px 28px rgba(198, 146, 43, 0.1), 0 2px 8px rgba(0, 0, 0, 0.04);
-  transform: translateY(-2px);
-}
-
-.lang-card:hover .lang-card__glow {
+.lang-btn--hover .lang-btn__glow,
+.lang-btn:hover .lang-btn__glow {
   opacity: 1;
 }
 
-.lang-card:hover .lang-card__arrow {
-  opacity: 1;
-  color: var(--gold);
-  transform: translateX(4px);
+.lang-btn--hover,
+.lang-btn:hover {
+  border-color: rgba(198,146,43,0.2);
+  background: rgba(255,252,245,0.85);
 }
 
-.lang-card:active {
-  transform: translateY(0) scale(0.98);
+.lang-btn:active {
+  transform: scale(0.98);
 }
 
-.lang-card__flag {
-  font-size: 32px;
-  line-height: 1;
+.lang-btn__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', 'Noto Sans Devanagari', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #C6922B;
+  background: rgba(198,146,43,0.06);
+  border: 1.5px solid rgba(198,146,43,0.18);
   flex-shrink: 0;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+  transition: all 0.35s ease;
 }
 
-.lang-card__info {
+.lang-btn:hover .lang-btn__icon {
+  background: rgba(198,146,43,0.1);
+  border-color: rgba(198,146,43,0.3);
+  box-shadow: 0 0 16px rgba(212,164,55,0.15);
+}
+
+.lang-btn__info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.lang-card__name {
+.lang-btn__name {
   font-weight: 600;
   font-size: 16px;
-  color: var(--navy);
+  color: #111827;
   letter-spacing: 0.01em;
 }
 
-.lang-card__native {
+.lang-btn__native {
   font-size: 13px;
-  color: var(--text-muted);
+  color: #9CA3AF;
   font-style: italic;
 }
 
-.lang-card__arrow {
-  font-size: 20px;
-  color: var(--text-faint);
-  opacity: 0;
-  transition: all 0.3s var(--ease-out);
+.lang-btn__arrow {
+  font-size: 18px;
+  color: #C6922B;
   flex-shrink: 0;
+  font-weight: 300;
 }
 
-/* ── Footer Note ── */
+/* ═══ FOOTER TEXT ═══ */
 .lang-modal__footer {
-  font-family: var(--font-display);
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 13px;
   font-style: italic;
-  color: var(--gold);
+  color: #C6922B;
   margin-top: 28px;
-  opacity: 0;
   letter-spacing: 0.06em;
-  animation: fadeIn 1s 0.8s var(--ease-out) forwards;
+  position: relative;
+  z-index: 1;
 }
 
-/* ── Responsive ── */
-@media (max-width: 480px) {
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1024px) {
+  .lang-sanskrit-section {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
   .lang-modal {
-    padding: 36px 28px 32px;
-    border-radius: 24px;
+    padding: 40px 28px 36px;
+    border-radius: 28px;
+    max-width: 95vw;
   }
 
   .lang-modal__title {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   .lang-modal__om {
-    font-size: 40px;
+    font-size: 36px;
   }
 
-  .lang-card {
-    padding: 16px 18px;
+  .lang-modal__sacred {
+    width: 60px;
+    height: 60px;
   }
+
+  .lang-btn {
+    padding: 16px 18px;
+    border-radius: 16px;
+  }
+
+  .lang-btn__icon {
+    width: 36px;
+    height: 36px;
+    font-size: 17px;
+  }
+}
+
+/* ═══ AMBIENT ANIMATIONS ═══ */
+@keyframes bgFloat {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  33% { transform: translateY(-8px) translateX(3px); }
+  66% { transform: translateY(5px) translateX(-3px); }
+}
+
+@keyframes bgBreathe {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.02); }
 }
