@@ -42,7 +42,7 @@ const CREATORS = [
   },
   {
     name: 'Chirag',
-    role: 'Developer',
+    role: 'Co-Creator',
     image: null, // placeholder — user will add later
   },
 ];

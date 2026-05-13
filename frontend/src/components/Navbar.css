@@ -109,6 +109,47 @@
 .nav__icon-btn:hover { background: #F5F2EB; color: #6B7280 }
 .nav__icon-btn .material-symbols-outlined { font-size: 20px }
 
+/* ── Logged-in User ── */
+.nav__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(198, 146, 43, 0.2);
+  object-fit: cover;
+}
+
+.nav__username {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.nav__signout {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  background: transparent;
+  color: #6B7280;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.nav__signout:hover {
+  border-color: #dc2626;
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.04);
+}
+
 /* ── Responsive ── */
 @media (max-width: 1200px) {
   .nav__inner { padding: 0 40px }
@@ -118,4 +159,6 @@
   .nav__inner { padding: 0 20px }
   .nav__brand { font-size: 22px }
   .nav__signin { padding: 8px 18px; font-size: 12px }
+  .nav__username { display: none }
+  .nav__signout { padding: 6px 14px; font-size: 11px }
 }
