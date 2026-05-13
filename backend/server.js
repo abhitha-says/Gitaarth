@@ -1,7 +1,10 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import { connectDB } from './config/db.js';
 import chatRouter from './routes/chat.js';
+import shlokaRouter from './routes/shlokas.js';
+import userRouter from './routes/user.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -20,8 +23,17 @@ app.get('/api/health', (_req, res) => {
 
 /* ─── Routes ─── */
 app.use('/api/chat', chatRouter);
+app.use('/api/shlokas', shlokaRouter);
+app.use('/api/user', userRouter);
 
 /* ─── Start ─── */
-app.listen(PORT, () => {
-  console.log(`✨ Gitaarth AI backend running on http://localhost:${PORT}`);
-});
+async function start() {
+  // Connect to MongoDB (gracefully skips if URI not set)
+  await connectDB();
+
+  app.listen(PORT, () => {
+    console.log(`✨ Gitaarth AI backend running on http://localhost:${PORT}`);
+  });
+}
+
+start();

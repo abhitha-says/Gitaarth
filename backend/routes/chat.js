@@ -52,6 +52,7 @@ router.post('/', async (req, res) => {
     });
   } catch (err) {
     console.error('❌ Chat error:', err.message);
+    console.error('❌ Full error:', JSON.stringify({ status: err.status, code: err.code, type: err.type }, null, 2));
 
     // Specific error for missing API key
     if (err.message?.includes('API key') || err.status === 401) {
