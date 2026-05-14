@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Chat from './pages/Chat';
 import Library from './pages/Library';
 import Profile from './pages/Profile';
+import About from './pages/About';
 
 export default function App() {
   const location = useLocation();
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/library" element={<Library />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </>
   );

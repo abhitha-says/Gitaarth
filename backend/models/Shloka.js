@@ -1,59 +1,57 @@
 /**
- * Gitaarth AI — Shloka Model
- * Bhagavad Gita shlokas with bilingual translations and thematic tags.
+ * Gitaarth AI — Shloka Model (Bhagavad Gita)
+ * Stores verified shlokas from all 18 chapters of the Gita.
  */
 
 import mongoose from 'mongoose';
 
-const shlokaSchema = new mongoose.Schema(
-  {
-    chapter: {
-      type: Number,
-      required: true,
-    },
-    verse: {
-      type: Number,
-      required: true,
-    },
-    chapterName: {
-      type: String,
-      required: true,
-    },
-    chapterNameSanskrit: {
-      type: String,
-      required: true,
-    },
-    sanskrit: {
-      type: String,
-      required: true,
-    },
-    translation: {
-      en: { type: String, required: true },
-      hi: { type: String, default: '' },
-    },
-    themes: {
-      type: [String],
-      index: true,
-    },
-    source: {
-      type: String,
-      default: 'bhagavad_gita',
-    },
+const shlokaSchema = new mongoose.Schema({
+  chapter: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 18,
   },
-  {
-    timestamps: true,
-    collection: 'shlokas',
-  }
-);
+  verse: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
+  chapterName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  chapterNameSanskrit: {
+    type: String,
+    default: '',
+    trim: true,
+  },
+  sanskrit: {
+    type: String,
+    required: true,
+  },
+  translations: {
+    en: { type: String, required: true },
+    hi: { type: String, default: '' },
+  },
+  keywords: [{
+    type: String,
+    lowercase: true,
+    trim: true,
+  }],
+}, {
+  timestamps: true,
+});
 
-/* ─── Compound unique index ─── */
+// Compound index for fast chapter+verse lookup
 shlokaSchema.index({ chapter: 1, verse: 1 }, { unique: true });
 
-/* ─── Text index for search ─── */
+// Text index for RAG-style keyword search
+shlokaSchema.index({ keywords: 1 });
 shlokaSchema.index(
-  { themes: 'text', 'translation.en': 'text', 'translation.hi': 'text' },
-  { weights: { themes: 10, 'translation.en': 5, 'translation.hi': 3 }, name: 'shloka_text_search' }
+  { 'translations.en': 'text', keywords: 'text' },
+  { name: 'shloka_text_search' }
 );
 
-const Shloka = mongoose.model('Shloka', shlokaSchema);
-export default Shloka;
+export default mongoose.model('Shloka', shlokaSchema);

@@ -1,0 +1,138 @@
+[
+  {
+    "chapter": 1, "verse": 1,
+    "chapterName": "Arjuna Vishada Yoga",
+    "chapterNameSanskrit": "अर्जुनविषादयोग",
+    "sanskrit": "धृतराष्ट्र उवाच\nधर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः।\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय॥",
+    "translations": { "en": "Dhritarashtra said: O Sanjaya, assembled on the holy field of Kurukshetra, desiring to fight, what did my sons and the sons of Pandu do?", "hi": "" },
+    "keywords": ["beginning", "war", "family", "conflict", "confusion"]
+  },
+  {
+    "chapter": 2, "verse": 3,
+    "chapterName": "Sankhya Yoga",
+    "chapterNameSanskrit": "सांख्ययोग",
+    "sanskrit": "क्लैब्यं मा स्म गमः पार्थ नैतत्त्वय्युपपद्यते।\nक्षुद्रं हृदयदौर्बल्यं त्यक्त्वोत्तिष्ठ परन्तप॥",
+    "translations": { "en": "Do not yield to cowardice, O Arjuna. It does not become you. Shake off this weakness of heart and arise!", "hi": "" },
+    "keywords": ["courage", "fear", "cowardice", "weakness", "strength", "arise", "motivation"]
+  },
+  {
+    "chapter": 2, "verse": 14,
+    "chapterName": "Sankhya Yoga",
+    "chapterNameSanskrit": "सांख्ययोग",
+    "sanskrit": "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः।\nआगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥",
+    "translations": { "en": "The contact between senses and objects gives rise to fleeting happiness and distress. They are temporary; learn to endure them.", "hi": "" },
+    "keywords": ["pain", "suffering", "patience", "temporary", "loss", "breakup", "sadness", "endurance"]
+  },
+  {
+    "chapter": 2, "verse": 22,
+    "chapterName": "Sankhya Yoga",
+    "chapterNameSanskrit": "सांख्ययोग",
+    "sanskrit": "वासांसि जीर्णानि यथा विहाय नवानि गृह्णाति नरोऽपराणि।\nतथा शरीराणि विहाय जीर्णान्यन्यानि संयाति नवानि देही॥",
+    "translations": { "en": "As a person puts on new garments giving up old ones, the soul accepts new bodies giving up the old.", "hi": "" },
+    "keywords": ["death", "loss", "grief", "soul", "change", "transformation", "rebirth"]
+  },
+  {
+    "chapter": 2, "verse": 27,
+    "chapterName": "Sankhya Yoga",
+    "chapterNameSanskrit": "सांख्ययोग",
+    "sanskrit": "जातस्य हि ध्रुवो मृत्युर्ध्रुवं जन्म मृतस्य च।\nतस्मादपरिहार्येऽर्थे न त्वं शोचितुमर्हसि॥",
+    "translations": { "en": "For one who has taken birth, death is certain; and for one who has died, birth is certain. You should not grieve over the inevitable.", "hi": "" },
+    "keywords": ["death", "grief", "acceptance", "loss", "inevitable", "mourning"]
+  },
+  {
+    "chapter": 2, "verse": 47,
+    "chapterName": "Sankhya Yoga",
+    "chapterNameSanskrit": "सांख्ययोग",
+    "sanskrit": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",
+    "translations": { "en": "You have the right to perform your duty, but you are not entitled to the fruits of your actions.", "hi": "" },
+    "keywords": ["duty", "action", "anxiety", "career", "work", "results", "karma", "detachment", "exam"]
+  },
+  {
+    "chapter": 2, "verse": 62,
+    "chapterName": "Sankhya Yoga",
+    "chapterNameSanskrit": "सांख्ययोग",
+    "sanskrit": "ध्यायतो विषयान्पुंसः सङ्गस्तेषूपजायते।\nसङ्गात्सञ्जायते कामः कामात्क्रोधोऽभिजायते॥",
+    "translations": { "en": "When a person dwells on sense objects, attachment arises. From attachment comes desire, and from desire comes anger.", "hi": "" },
+    "keywords": ["addiction", "desire", "anger", "attachment", "temptation", "habits", "craving"]
+  },
+  {
+    "chapter": 3, "verse": 35,
+    "chapterName": "Karma Yoga",
+    "chapterNameSanskrit": "कर्मयोग",
+    "sanskrit": "श्रेयान्स्वधर्मो विगुणः परधर्मात्स्वनुष्ठितात्।\nस्वधर्मे निधनं श्रेयः परधर्मो भयावहः॥",
+    "translations": { "en": "It is better to do your own duty imperfectly than to do another's duty perfectly.", "hi": "" },
+    "keywords": ["comparison", "jealousy", "identity", "purpose", "career", "calling", "dharma", "peer pressure"]
+  },
+  {
+    "chapter": 4, "verse": 7,
+    "chapterName": "Jnana Karma Sanyasa Yoga",
+    "chapterNameSanskrit": "ज्ञानकर्मसंन्यासयोग",
+    "sanskrit": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥",
+    "translations": { "en": "Whenever there is a decline in righteousness and an increase in unrighteousness, I manifest myself on earth.", "hi": "" },
+    "keywords": ["injustice", "wrong", "righteousness", "hope", "faith", "change", "divine"]
+  },
+  {
+    "chapter": 4, "verse": 38,
+    "chapterName": "Jnana Karma Sanyasa Yoga",
+    "chapterNameSanskrit": "ज्ञानकर्मसंन्यासयोग",
+    "sanskrit": "न हि ज्ञानेन सदृशं पवित्रमिह विद्यते।",
+    "translations": { "en": "In this world, there is nothing as purifying as knowledge.", "hi": "" },
+    "keywords": ["knowledge", "learning", "education", "study", "wisdom", "growth"]
+  },
+  {
+    "chapter": 6, "verse": 5,
+    "chapterName": "Dhyana Yoga",
+    "chapterNameSanskrit": "ध्यानयोग",
+    "sanskrit": "उद्धरेदात्मनात्मानं नात्मानमवसादयेत्।\nआत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः॥",
+    "translations": { "en": "Elevate yourself by your own mind. The mind alone is your friend and the mind alone is your enemy.", "hi": "" },
+    "keywords": ["self-improvement", "confidence", "mental health", "depression", "self-doubt", "motivation"]
+  },
+  {
+    "chapter": 6, "verse": 34,
+    "chapterName": "Dhyana Yoga",
+    "chapterNameSanskrit": "ध्यानयोग",
+    "sanskrit": "चञ्चलं हि मनः कृष्ण प्रमाथि बलवद्दृढम्।\nतस्याहं निग्रहं मन्ये वायोरिव सुदुष्करम्॥",
+    "translations": { "en": "The mind is restless, turbulent, strong. I consider it as difficult to control as the wind.", "hi": "" },
+    "keywords": ["focus", "distraction", "meditation", "anxiety", "overthinking", "concentration"]
+  },
+  {
+    "chapter": 9, "verse": 22,
+    "chapterName": "Raja Vidya Raja Guhya Yoga",
+    "chapterNameSanskrit": "राजविद्याराजगुह्ययोग",
+    "sanskrit": "अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते।\nतेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्॥",
+    "translations": { "en": "Those who worship me with undivided devotion — to them I carry what they lack and preserve what they have.", "hi": "" },
+    "keywords": ["devotion", "faith", "trust", "surrender", "god", "prayer", "spiritual"]
+  },
+  {
+    "chapter": 11, "verse": 32,
+    "chapterName": "Vishwaroop Darshana Yoga",
+    "chapterNameSanskrit": "विश्वरूपदर्शनयोग",
+    "sanskrit": "कालोऽस्मि लोकक्षयकृत्प्रवृद्धो लोकान्समाहर्तुमिह प्रवृत्तः।",
+    "translations": { "en": "I am Time, the great destroyer of worlds.", "hi": "" },
+    "keywords": ["time", "death", "mortality", "perspective", "impermanence", "fear"]
+  },
+  {
+    "chapter": 12, "verse": 13,
+    "chapterName": "Bhakti Yoga",
+    "chapterNameSanskrit": "भक्तियोग",
+    "sanskrit": "अद्वेष्टा सर्वभूतानां मैत्रः करुण एव च।\nनिर्ममो निरहङ्कारः समदुःखसुखः क्षमी॥",
+    "translations": { "en": "One who is not envious, a kind friend to all, free from ego, equal in happiness and distress, and forgiving — such a devotee is dear to Me.", "hi": "" },
+    "keywords": ["kindness", "forgiveness", "ego", "humility", "friendship", "compassion", "love", "relationships"]
+  },
+  {
+    "chapter": 18, "verse": 48,
+    "chapterName": "Moksha Sanyasa Yoga",
+    "chapterNameSanskrit": "मोक्षसंन्यासयोग",
+    "sanskrit": "सहजं कर्म कौन्तेय सदोषमपि न त्यजेत्।\nसर्वारम्भा हि दोषेण धूमेनाग्निरिवावृताः॥",
+    "translations": { "en": "One should not give up work born of one's nature, even if imperfect. All undertakings are covered by faults, as fire is by smoke.", "hi": "" },
+    "keywords": ["imperfection", "perfectionism", "work", "effort", "mistakes", "acceptance"]
+  },
+  {
+    "chapter": 18, "verse": 66,
+    "chapterName": "Moksha Sanyasa Yoga",
+    "chapterNameSanskrit": "मोक्षसंन्यासयोग",
+    "sanskrit": "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥",
+    "translations": { "en": "Abandon all varieties of dharma and surrender unto Me. I shall deliver you from all sins. Do not fear.", "hi": "" },
+    "keywords": ["surrender", "guilt", "sin", "forgiveness", "relief", "peace", "liberation", "letting go"]
+  }
+]
