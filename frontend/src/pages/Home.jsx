@@ -78,7 +78,7 @@ export default function Home() {
           {/* ── Left ── */}
           <div className="hero__left">
             <div className="hero__badge">
-              <span className="hero__badge-icon">✦</span>
+              <span className="hero__badge-icon">🪷</span>
               <span className="hero__badge-text">Guided by Ancient Wisdom</span>
             </div>
 
@@ -93,11 +93,11 @@ export default function Home() {
             </p>
 
             <div className="hero__search-box">
-              <span className="hero__search-sparkle">✦</span>
+              <span className="hero__search-sparkle">🪷</span>
               <input
                 className="hero__search-field"
                 type="text"
-                placeholder="What burdens your heart today, Paarth?"
+                placeholder="Hey Paarth..."
                 readOnly
                 onClick={() => (window.location.href = '/chat')}
               />
@@ -112,7 +112,7 @@ export default function Home() {
 
             <div className="hero__btns">
               <Link to="/chat" className="hero__btn hero__btn--primary">
-                <span className="hero__btn-sparkle">✦</span>
+                <span className="hero__btn-sparkle">🪷</span>
                 Seek Guidance
               </Link>
               <Link to="/library" className="hero__btn hero__btn--ghost">
@@ -154,8 +154,8 @@ export default function Home() {
 
               {/* Main artwork */}
               <img
-                src="/gitaarth-hero-light.png"
-                alt="Gitaarth AI — Lord Krishna and Lord Ram"
+                src="/gitaarth-hero-light-Photoroom.png"
+                alt="Gitaarth AI — Ancient Wisdom for Modern Problems"
                 className="hero__img"
               />
             </div>
@@ -189,7 +189,7 @@ export default function Home() {
           <div className="card-wisdom">
             <div className="card-wisdom__head">
               <div className="card-wisdom__head-left">
-                <span className="card-wisdom__dot">✦</span>
+                <span className="card-wisdom__dot">🪷</span>
                 <span className="card-wisdom__label">Today's Wisdom</span>
               </div>
               <Link to="/library" className="card-wisdom__link">
@@ -209,7 +209,7 @@ export default function Home() {
             </div>
             <div className="card-wisdom__foot">
               <div className="card-wisdom__ref">
-                <span className="card-wisdom__ref-dot">✦</span>
+                <span className="card-wisdom__ref-dot">🪷</span>
                 Bhagavad Gita 2.47
               </div>
               <button className="card-wisdom__share" aria-label="Share">
@@ -220,11 +220,275 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ══════════════════════════════════════════
+          SCRIPTURE SHOWCASE
+      ══════════════════════════════════════════ */}
+      <section className="scripture-section" id="scripture-section">
+        <div className="scripture__wrap">
+          <div className="section-header">
+            <span className="section-header__label">🪷 Sacred Sources</span>
+            <h2 className="section-header__title">Wisdom from the Eternal Scriptures</h2>
+            <p className="section-header__sub">
+              Three timeless epics, one universal truth — guidance for every struggle, every soul.
+            </p>
+          </div>
+
+          <div className="scripture__grid">
+            {[
+              {
+                title: 'Bhagavad Gita',
+                sanskrit: 'भगवद्गीता',
+                chapters: '18 Chapters',
+                verses: '700 Verses',
+                desc: 'The divine song of Lord Krishna on the battlefield of Kurukshetra — the ultimate guide to duty, devotion, and self-realization.',
+                img: '/icon-gita.png',
+                accent: 'gold',
+              },
+              {
+                title: 'Ramayana',
+                sanskrit: 'रामायण',
+                chapters: '7 Kandas',
+                verses: '24,000 Verses',
+                desc: 'The journey of Lord Rama — embodying dharma, sacrifice, and the triumph of righteousness over darkness.',
+                img: '/image copy.png',
+                accent: 'blue',
+              },
+              {
+                title: 'Mahabharata',
+                sanskrit: 'महाभारत',
+                chapters: '18 Parvas',
+                verses: '100,000 Verses',
+                desc: 'The greatest epic of humanity — a tapestry of war, wisdom, love, and the eternal struggle between right and wrong.',
+                img: '/image copy 2.png',
+                accent: 'deep',
+              },
+            ].map((s, i) => (
+              <div key={i} className={`scripture-card scripture-card--${s.accent}`}>
+                <div className="scripture-card__glow" />
+                <div className="scripture-card__icon">
+                  <img src={s.img} alt={s.title} className="scripture-card__icon-img" />
+                </div>
+                <span className="scripture-card__sanskrit">{s.sanskrit}</span>
+                <h3 className="scripture-card__title">{s.title}</h3>
+                <p className="scripture-card__desc">{s.desc}</p>
+                <div className="scripture-card__meta">
+                  <span className="scripture-card__tag">{s.chapters}</span>
+                  <span className="scripture-card__tag">{s.verses}</span>
+                </div>
+                <Link to="/library" className="scripture-card__link">
+                  Explore <span className="material-symbols-outlined">arrow_forward</span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          WISDOM PATHS / TOPICS
+      ══════════════════════════════════════════ */}
+      <section className="paths-section" id="paths-section">
+        <div className="paths__wrap">
+          <div className="section-header">
+            <span className="section-header__label">🪷 Wisdom Paths</span>
+            <h2 className="section-header__title">What Troubles Your Soul?</h2>
+            <p className="section-header__sub">
+              Select a path and receive personalized guidance drawn from ancient wisdom.
+            </p>
+          </div>
+
+          <div className="paths__grid">
+            {[
+              { icon: 'psychology', label: 'Anxiety & Fear', color: '#8B5CF6', prompt: 'I am struggling with anxiety and fear. My mind feels restless and I cannot find peace. Please guide me with wisdom from the scriptures.' },
+              { icon: 'favorite', label: 'Love & Relationships', color: '#EC4899', prompt: 'I am facing difficulties in my relationships and matters of the heart. Please share divine wisdom to help me navigate love and connections.' },
+              { icon: 'work', label: 'Career & Purpose', color: '#F59E0B', prompt: 'I feel lost about my career and life purpose. I don\'t know which path to choose. Please guide me with ancient wisdom about finding one\'s true calling.' },
+              { icon: 'family_restroom', label: 'Family & Duty', color: '#10B981', prompt: 'I am struggling with family responsibilities and duties. There are conflicts between what I want and what is expected of me. Please share wisdom about dharma and family duty.' },
+              { icon: 'self_improvement', label: 'Self Discovery', color: '#6366F1', prompt: 'I want to understand myself better and discover who I truly am. Please guide me on the path of self-discovery with scriptural wisdom.' },
+              { icon: 'balance', label: 'Moral Dilemmas', color: '#EF4444', prompt: 'I am facing a difficult moral dilemma where I cannot tell right from wrong. Please help me understand what is dharma in my situation.' },
+              { icon: 'mood_bad', label: 'Grief & Loss', color: '#64748B', prompt: 'I am going through deep grief and loss. The pain feels unbearable. Please share divine wisdom to help me find strength and acceptance.' },
+              { icon: 'temple_buddhist', label: 'Spiritual Growth', color: '#C6922B', prompt: 'I want to grow spiritually and deepen my connection with the divine. Please guide me on the path of spiritual evolution with wisdom from the scriptures.' },
+            ].map((p, i) => (
+              <Link
+                to={`/chat?topic=${encodeURIComponent(p.prompt)}`}
+                key={i}
+                className="path-chip"
+                style={{ '--chip-color': p.color }}
+              >
+                <span className="path-chip__icon material-symbols-outlined">{p.icon}</span>
+                <span className="path-chip__label">{p.label}</span>
+                <span className="path-chip__arrow material-symbols-outlined">arrow_forward</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          IMPACT STATS
+      ══════════════════════════════════════════ */}
+      <section className="stats-section" id="stats-section">
+        <div className="stats__wrap">
+          <div className="stats__grid">
+            {[
+              { number: '10,000+', label: 'Seekers Guided', icon: 'group' },
+              { number: '50,000+', label: 'Conversations', icon: 'forum' },
+              { number: '700+', label: 'Gita Verses', icon: 'menu_book' },
+              { number: '3', label: 'Sacred Scriptures', icon: 'auto_stories' },
+            ].map((s, i) => (
+              <div key={i} className="stat-card">
+                <div className="stat-card__icon">
+                  <span className="material-symbols-outlined">{s.icon}</span>
+                </div>
+                <span className="stat-card__number">{s.number}</span>
+                <span className="stat-card__label">{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          TESTIMONIALS
+      ══════════════════════════════════════════ */}
+      <section className="testimonials-section" id="testimonials-section">
+        <div className="testimonials__wrap">
+          <div className="section-header">
+            <span className="section-header__label">🪷 Seeker Stories</span>
+            <h2 className="section-header__title">Voices of Transformation</h2>
+            <p className="section-header__sub">
+              Real people who found clarity through the wisdom of the ancients.
+            </p>
+          </div>
+
+          <div className="testimonials__grid">
+            {[
+              {
+                quote: 'I was lost after losing my job. Gitaarth reminded me of the Gita\'s teaching — focus on effort, not outcomes. It changed my entire perspective.',
+                name: 'Arjun Mehta',
+                role: 'Software Engineer, Bangalore',
+                avatar: 'https://randomuser.me/api/portraits/men/45.jpg',
+              },
+              {
+                quote: 'The way it connected my relationship struggle with Ram and Sita\'s story… I felt truly understood. No AI has ever made me feel this seen.',
+                name: 'Priya Sharma',
+                role: 'Teacher, Delhi',
+                avatar: 'https://randomuser.me/api/portraits/women/65.jpg',
+              },
+              {
+                quote: 'As someone who doesn\'t read Sanskrit, Gitaarth opened the Bhagavad Gita for me in a way that felt personal, alive, and deeply relevant.',
+                name: 'Rahul Desai',
+                role: 'Student, Mumbai',
+                avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
+              },
+            ].map((t, i) => (
+              <div key={i} className="testimonial-card">
+                <div className="testimonial-card__stars">
+                  {'★★★★★'.split('').map((s, j) => (
+                    <span key={j} className="testimonial-card__star">{s}</span>
+                  ))}
+                </div>
+                <p className="testimonial-card__quote">"{t.quote}"</p>
+                <div className="testimonial-card__author">
+                  <img className="testimonial-card__avatar" src={t.avatar} alt={t.name} />
+                  <div>
+                    <span className="testimonial-card__name">{t.name}</span>
+                    <span className="testimonial-card__role">{t.role}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          FAQ SECTION
+      ══════════════════════════════════════════ */}
+      <section className="faq-section" id="faq-section">
+        <div className="faq__wrap">
+          <div className="section-header">
+            <span className="section-header__label">🪷 Questions</span>
+            <h2 className="section-header__title">Frequently Asked Questions</h2>
+          </div>
+
+          <div className="faq__list">
+            {[
+              {
+                q: 'What is Gitaarth AI?',
+                a: 'Gitaarth AI is a spiritual counseling platform that provides personalized guidance using wisdom from the Bhagavad Gita, Ramayana, and Mahabharata. It uses advanced AI to understand your struggles and connect them with relevant ancient teachings.',
+              },
+              {
+                q: 'Is the scripture interpretation accurate?',
+                a: 'Yes. Every shloka and verse referenced is sourced directly from authenticated texts. Our AI has been trained on verified translations and commentaries from renowned scholars to ensure authenticity.',
+              },
+              {
+                q: 'Can I use it in Hindi or Hinglish?',
+                a: 'Absolutely! Gitaarth understands and responds in English, Hindi, and Hinglish. Speak naturally — the way you would with a wise elder.',
+              },
+              {
+                q: 'Is my conversation private?',
+                a: 'Your privacy is sacred to us. All conversations are encrypted and we never share your personal data. Your spiritual journey remains yours alone.',
+              },
+              {
+                q: 'Is Gitaarth free to use?',
+                a: 'Yes, Gitaarth is currently free for all seekers. Our mission is to make ancient wisdom accessible to everyone, regardless of background or means.',
+              },
+            ].map((faq, i) => (
+              <details key={i} className="faq-item">
+                <summary className="faq-item__question">
+                  <span>{faq.q}</span>
+                  <span className="faq-item__chevron material-symbols-outlined">expand_more</span>
+                </summary>
+                <p className="faq-item__answer">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          FINAL CTA
+      ══════════════════════════════════════════ */}
+      <section className="cta-section" id="cta-section">
+        <div className="cta__wrap">
+          <div className="cta__glow" aria-hidden="true" />
+          <span className="cta__sparkle">🪷</span>
+          <h2 className="cta__title">
+            Your Kurukshetra awaits.<br />
+            <span className="cta__title-gold">Seek the answer within.</span>
+          </h2>
+          <p className="cta__sub">
+            Begin your conversation with the wisdom that has guided millions for millennia.
+          </p>
+          <div className="cta__btns">
+            <Link to="/chat" className="hero__btn hero__btn--primary cta__btn">
+              <span className="hero__btn-sparkle">🪷</span>
+              Start Your Journey
+            </Link>
+            <Link to="/library" className="hero__btn hero__btn--ghost cta__btn">
+              <span className="material-symbols-outlined">auto_stories</span>
+              Browse Scriptures
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── Footer ── */}
       <footer className="site-footer">
         <div className="site-footer__inner">
-          <span className="site-footer__brand">Gitaarth AI</span>
-          <span className="site-footer__copy">Ancient wisdom, modern clarity. © 2024</span>
+          <div className="site-footer__top">
+            <div className="site-footer__brand-block">
+              <span className="site-footer__brand">Gitaarth AI</span>
+              <p className="site-footer__tagline">Ancient wisdom for modern souls.</p>
+            </div>
+            <div className="site-footer__links">
+              <Link to="/chat" className="site-footer__link">Seek Guidance</Link>
+              <Link to="/library" className="site-footer__link">Scripture Library</Link>
+            </div>
+          </div>
+          <div className="site-footer__bottom">
+            <span className="site-footer__copy">© 2024 Gitaarth AI — Made with ♡ for seekers everywhere</span>
+          </div>
         </div>
       </footer>
     </main>

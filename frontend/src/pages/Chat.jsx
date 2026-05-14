@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import ChatBubble from '../components/ChatBubble';
 import LanguageSelector from '../components/LanguageSelector';
 import { API_BASE_URL, SAMPLE_SHLOKAS } from '../utils/constants';
@@ -29,6 +29,8 @@ export default function Chat() {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const fallbackIdx = useRef(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const topicHandled = useRef(false);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -38,7 +40,45 @@ export default function Chat() {
     setLanguage(lang);
     setShowLangSelector(false);
     setMessages([]);
-    setTimeout(() => inputRef.current?.focus(), 400);
+
+    // Check if there's a topic from the Wisdom Paths
+    const topic = searchParams.get('topic');
+    if (topic && !topicHandled.current) {
+      topicHandled.current = true;
+      // Clear the query param from the URL so refresh doesn't re-send
+      setSearchParams({}, { replace: true });
+      // Auto-send the topic after a brief delay for smooth UX
+      setTimeout(() => {
+        autoSendTopic(topic, lang);
+      }, 600);
+    } else {
+      setTimeout(() => inputRef.current?.focus(), 400);
+    }
+  };
+
+  const autoSendTopic = async (topicText, lang) => {
+    // Show the user message
+    setMessages([{ id: Date.now(), role: 'user', text: topicText }]);
+    setIsTyping(true);
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: topicText, language: lang?.code || 'en', history: [] }),
+      });
+      if (!res.ok) throw new Error('Server error');
+      const response = await res.json();
+      setMessages(prev => [...prev, { id: Date.now() + 1, role: 'assistant', persona: response.persona || 'krishna', text: response.text, shloka: response.shloka, counseling: response.counseling }]);
+    } catch {
+      const fb = FALLBACK[Math.min(fallbackIdx.current, FALLBACK.length - 1)];
+      fallbackIdx.current++;
+      await new Promise(r => setTimeout(r, 800 + Math.random() * 800));
+      setMessages(prev => [...prev, { id: Date.now() + 1, role: 'assistant', persona: fb.persona, text: fb.text, shloka: fb.shloka, counseling: fb.counseling }]);
+    } finally {
+      setIsTyping(false);
+      setTimeout(() => inputRef.current?.focus(), 200);
+    }
   };
 
   const callBackend = async (userText) => {

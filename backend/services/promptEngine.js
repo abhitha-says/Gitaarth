@@ -1,10 +1,14 @@
 /**
  * Gitaarth AI — Prompt Engine
  * Builds the system prompt that instructs Grok to act as a divine counselor.
+ * Now queries MongoDB for relevant shlokas (with in-memory fallback).
  */
 
-/* ─── Sample scripture context (embedded until DB is ready) ─── */
-const GITA_SHLOKAS = [
+import { isDBConnected } from '../config/db.js';
+import Shloka from '../models/Shloka.js';
+
+/* ─── Fallback shlokas (used when DB is unavailable) ─── */
+const FALLBACK_SHLOKAS = [
   { chapter: 2, verse: 47, sanskrit: 'कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥', translation: 'You have the right to perform your duty, but you are not entitled to the fruits of your actions.', theme: 'duty, action, anxiety, career, work, results, karma' },
   { chapter: 2, verse: 14, sanskrit: 'मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः।\nआगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥', translation: 'The contact between senses and objects gives rise to fleeting happiness and distress. They are temporary; learn to endure them.', theme: 'pain, suffering, patience, temporary, loss, breakup, sadness' },
   { chapter: 4, verse: 7, sanskrit: 'यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥', translation: 'Whenever righteousness declines and unrighteousness prevails, I manifest myself on earth.', theme: 'injustice, wrong, righteousness, hope, faith, change' },
@@ -18,15 +22,89 @@ const GITA_SHLOKAS = [
 ];
 
 /**
+ * Find relevant shlokas from MongoDB using text search.
+ * Falls back to in-memory keyword matching if DB is unavailable.
+ */
+async function findRelevantShlokas(userMessage, count = 3) {
+  // ─── Try MongoDB text search first ───
+  if (isDBConnected()) {
+    try {
+      const dbResults = await Shloka.find(
+        { $text: { $search: userMessage } },
+        { score: { $meta: 'textScore' } }
+      )
+        .sort({ score: { $meta: 'textScore' } })
+        .limit(count)
+        .lean();
+
+      if (dbResults.length > 0) {
+        return dbResults.map((s) => ({
+          chapter: s.chapter,
+          verse: s.verse,
+          sanskrit: s.sanskrit,
+          translation: s.translation?.en || s.translation || '',
+          theme: (s.themes || []).join(', '),
+        }));
+      }
+
+      // If text search returns nothing, get random shlokas
+      const totalShlokas = await Shloka.countDocuments();
+      if (totalShlokas > 0) {
+        const randomShlokas = await Shloka.aggregate([
+          { $sample: { size: count } },
+        ]);
+        return randomShlokas.map((s) => ({
+          chapter: s.chapter,
+          verse: s.verse,
+          sanskrit: s.sanskrit,
+          translation: s.translation?.en || '',
+          theme: (s.themes || []).join(', '),
+        }));
+      }
+    } catch (dbErr) {
+      console.warn('⚠️ DB shloka lookup failed, using fallback:', dbErr.message);
+    }
+  }
+
+  // ─── Fallback: in-memory keyword matching ───
+  return findRelevantShlokasFallback(userMessage, count);
+}
+
+/**
+ * In-memory keyword matching (original logic preserved).
+ */
+function findRelevantShlokasFallback(userMessage, count = 3) {
+  const words = userMessage.toLowerCase().split(/\s+/);
+
+  const scored = FALLBACK_SHLOKAS.map((shloka) => {
+    const themes = shloka.theme.toLowerCase().split(/,\s*/);
+    let score = 0;
+    for (const word of words) {
+      for (const theme of themes) {
+        if (theme.includes(word) || word.includes(theme)) {
+          score += 2;
+        }
+      }
+    }
+    // Add some randomness to prevent always returning the same shlokas
+    score += Math.random() * 0.5;
+    return { ...shloka, score };
+  });
+
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, count);
+}
+
+/**
  * Build the system prompt for the Grok API.
  * @param {string} language — 'en' or 'hi'
  * @param {string} userMessage — the user's current message
  * @param {Array} conversationHistory — previous messages
  * @returns {string} system prompt
  */
-export function buildSystemPrompt(language, userMessage, conversationHistory = []) {
-  // Find the most relevant shlokas based on keyword matching
-  const relevantShlokas = findRelevantShlokas(userMessage, 3);
+export async function buildSystemPrompt(language, userMessage, conversationHistory = []) {
+  // Find the most relevant shlokas (from DB or fallback)
+  const relevantShlokas = await findRelevantShlokas(userMessage, 3);
 
   const langInstruction = language === 'hi'
     ? `CRITICAL LANGUAGE RULE: You MUST respond in HINGLISH — that is, Hindi language written using the English/Roman alphabet (NOT Devanagari for your words). Example: "Mere dost, yeh waqt mushkil hai lekin..." The user writes in Hinglish too. Sanskrit shlokas should still be in Devanagari script.`
@@ -95,35 +173,11 @@ ${shlokaContext}
 }
 
 /**
- * Find the most relevant shlokas by keyword matching.
- */
-function findRelevantShlokas(userMessage, count = 3) {
-  const words = userMessage.toLowerCase().split(/\s+/);
-
-  const scored = GITA_SHLOKAS.map(shloka => {
-    const themes = shloka.theme.toLowerCase().split(/,\s*/);
-    let score = 0;
-    for (const word of words) {
-      for (const theme of themes) {
-        if (theme.includes(word) || word.includes(theme)) {
-          score += 2;
-        }
-      }
-    }
-    // Add some randomness to prevent always returning the same shlokas
-    score += Math.random() * 0.5;
-    return { ...shloka, score };
-  });
-
-  scored.sort((a, b) => b.score - a.score);
-  return scored.slice(0, count);
-}
-
-/**
  * Build the messages array for the Grok API call.
+ * NOTE: This is now async because buildSystemPrompt queries the DB.
  */
-export function buildMessages(language, userMessage, conversationHistory = []) {
-  const systemPrompt = buildSystemPrompt(language, userMessage, conversationHistory);
+export async function buildMessages(language, userMessage, conversationHistory = []) {
+  const systemPrompt = await buildSystemPrompt(language, userMessage, conversationHistory);
 
   const messages = [
     { role: 'system', content: systemPrompt },

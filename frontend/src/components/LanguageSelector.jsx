@@ -238,7 +238,7 @@ export default function LanguageSelector({ isOpen, onSelect }) {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 2 }}
               >
-                ✦ This is a safe space for you ✦
+                🪷 This is a safe space for you 🪷
               </motion.p>
             </div>
           </motion.div>
