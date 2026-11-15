@@ -1,0 +1,37 @@
+/* Shared pieces of the morning: living pictures, mist, dust. */
+
+.living { position: relative; display: block; }
+.living > img,
+.living > canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.living > img { object-fit: contain; user-select: none; -webkit-user-drag: none; transition: opacity 400ms linear; }
+.living > canvas { opacity: 0; transition: opacity 400ms linear; pointer-events: none; }
+.living.is-live > canvas { opacity: 1; }
+.living.is-live > img { opacity: 0; }
+
+.mist { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.mist__band {
+  --tile: calc(var(--h) * 2);
+  position: absolute;
+  left: calc(var(--tile) * -1);
+  width: calc(100% + var(--tile));
+  height: var(--h);
+  background-repeat: repeat-x;
+  background-size: var(--tile) 100%;
+  animation: mist-drift var(--t) linear infinite;
+  will-change: transform;
+}
+@keyframes mist-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(var(--tile), 0, 0); }
+}
+
+.dust { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mist__band { animation: none; }
+}
+
+/* The still tier holds every loop, whatever the OS setting says */
+html[data-tier='still'] .mist__band,
+html[data-tier='still'] .grass,
+html[data-tier='still'] .j-seeker__light { animation: none !important; }

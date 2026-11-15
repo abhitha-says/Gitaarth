@@ -1,84 +1,316 @@
-/* ═══ Profile Page ═══ */
-.profile {
-  min-height: 100vh;
-  padding: 100px 0 var(--space-4xl);
+/* ─── Sanctuary: a shelf in the morning light, and a diary beside it ─── */
+.sanctuary {
+  position: relative;
+  padding: calc(var(--nav-h) + clamp(2.25rem, 7vw, 5.5rem)) 0 clamp(5rem, 10vw, 8rem);
+}
+.sanctuary.is-still .mist__band { animation: none; }
+
+/* Words at the door */
+.sanctuary__head {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: end;
+}
+@media (min-width: 960px) {
+  .sanctuary__head { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+}
+.sanctuary__title {
+  margin-top: 1.1rem;
+  font-size: clamp(2.5rem, 1.55rem + 3.6vw, 4.5rem);
+  line-height: 1.04;
+  max-width: 13.5ch;
+  text-wrap: balance;
+}
+.sanctuary__lead {
+  margin-top: 1.25rem;
+  max-width: 33rem;
+  font-family: var(--font-read);
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.2rem);
+  line-height: 1.75;
+  color: var(--text-2);
+  text-wrap: pretty;
 }
 
-.profile--guest {
-  display: flex;
+.sanctuary__door { display: grid; gap: 0.9rem; }
+.sanctuary__alert {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem 1rem;
+  padding: 0.6rem 0.6rem 0.6rem 1.1rem;
+  border-left: 2px solid var(--saffron);
+  background: rgba(255, 252, 244, 0.85);
+  font-size: 0.95rem; color: var(--text-1);
+}
+.sanctuary__alert-close {
+  min-height: 44px; padding: 0 0.75rem;
+  font: 500 0.85rem var(--font-ui); color: var(--gold-ink);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+
+/* The account, as a slip of paper resting by the door */
+.threshold {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--r-md);
+  background: linear-gradient(128deg, #fffdf8 0%, #fbf6ea 100%);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-1);
+}
+.threshold--waiting { font-size: 0.95rem; color: var(--text-3); min-height: 4.5rem; }
+.threshold__face {
+  width: 48px; height: 48px; flex-shrink: 0;
+  display: grid; place-items: center; overflow: hidden;
+  border-radius: 50%;
+  background: var(--metal);
+  box-shadow: var(--metal-edge), var(--shadow-1);
+  font: 400 1.4rem var(--font-display); color: var(--ink-900);
+}
+.threshold__face img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+.threshold__who { flex: 1 1 9rem; min-width: 0; }
+.threshold__name { font: 500 1rem var(--font-ui); color: var(--text-1); }
+.threshold__note {
+  margin-top: 0.2rem;
+  font-size: 0.92rem; line-height: 1.55; color: var(--text-2);
+  overflow-wrap: anywhere;
+}
+.threshold--guest .threshold__btn { flex: 1 0 auto; }
+@media (min-width: 560px) {
+  .threshold--guest .threshold__btn { flex: 0 0 auto; }
+}
+
+/* The room: shelf and diary */
+.sanctuary__room {
+  margin-top: clamp(3.5rem, 8vw, 6rem);
+  display: grid;
+  gap: clamp(3.5rem, 6vw, 5rem);
+  align-items: start;
+}
+@media (min-width: 960px) {
+  .sanctuary__room { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+}
+
+.room__head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem;
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--line);
+}
+.room__title { font-size: clamp(1.9rem, 1.6rem + 1vw, 2.5rem); font-weight: 400; }
+.room__sub {
+  font: 500 0.72rem var(--font-ui);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+/* Undo, said quietly */
+.shelf__undo p {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.5rem;
+  margin: -0.6rem 0 0.8rem;
+  font-size: 0.92rem; color: var(--text-2);
+}
+.shelf__undo-btn {
+  min-height: 44px; padding: 0 0.4rem;
+  font: 500 0.92rem var(--font-ui); color: var(--gold-ink);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+
+/* ── The shelf: leaves strung on one cord, resting on a sandstone ledge ── */
+.shelf__stack { position: relative; --hole-x: clamp(0.85rem, 2.5vw, 1.35rem); }
+.shelf__stack::before {           /* the cord, seen between the leaves */
+  content: '';
+  position: absolute; top: -0.6rem; bottom: 1.2rem;
+  left: calc(var(--hole-x) + 4px);
+  width: 2px; border-radius: 2px;
+  background: linear-gradient(180deg, rgba(90, 52, 36, 0), rgba(90, 52, 36, 0.45) 2.5rem);
+}
+.shelf__leaves { position: relative; display: grid; gap: 0.85rem; }
+.kept-item { list-style: none; }
+
+.kept-card {
+  position: relative;
+  transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+.kept-card.leaf {
+  padding: 1.1rem 0.5rem 0.4rem calc(var(--hole-x) + 1.5rem);
+  border-radius: 10px / 28px;
+}
+.kept-card.paper {
+  margin-left: calc(var(--hole-x) + 0.9rem);
+  padding: 1.15rem 0.5rem 0.4rem 1.2rem;
+  border-radius: 4px;
+  background:
+    linear-gradient(225deg, var(--bg) 0 11px, #ece0c6 11px 13px, transparent 13px),
+    linear-gradient(128deg, #fffdf8 0%, #fbf6ea 100%);
+}
+@media (hover: hover) {
+  .kept-card:hover { transform: translate3d(0, -3px, 0); box-shadow: var(--shadow-3); }
+}
+.kept-card:active,
+.kept-card:focus-within { transform: translate3d(0, -2px, 0); box-shadow: var(--shadow-3); }
+.kept-card.leaf:hover, .kept-card.leaf:active, .kept-card.leaf:focus-within {
+  box-shadow: var(--shadow-3), inset 0 0 0 1px rgba(255, 250, 230, 0.35);
+}
+
+/* the cord hole: shaded on its upper-left inner wall, the cord passing through */
+.kept-card__hole {
+  position: absolute; left: var(--hole-x); top: 50%;
+  width: 10px; height: 10px; margin-top: -5px;
+  border-radius: 50%;
+  background:
+    linear-gradient(90deg, transparent 4px, rgba(90, 52, 36, 0.6) 4px 6px, transparent 6px),
+    var(--bg);
+  box-shadow: inset 1.5px 1.5px 2px rgba(74, 47, 28, 0.5), 0.5px 0.5px 0 rgba(255, 250, 230, 0.6);
+}
+
+.kept-card__body { min-width: 0; }
+.kept-card__kind {
+  margin-bottom: 0.45rem;
+  font: 500 0.7rem var(--font-ui); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.kept-card__sa {
+  margin-bottom: 0.35rem;
+  font-size: 1.22rem; line-height: 1.8;
+  color: var(--palm-ink);
+}
+.kept-card__text {
+  font-family: var(--font-read);
+  font-size: 1.0625rem; line-height: 1.7;
+  color: var(--text-1);
+}
+.leaf .kept-card__text { color: var(--palm-ink); }
+.kept-card__text.is-folded {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5;
+  overflow: hidden;
+}
+.kept-card__more {
+  min-height: 44px; padding: 0;
+  font: 500 0.88rem var(--font-ui); color: var(--gold-ink);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.kept-card__verse {
+  margin-top: 0.7rem; padding-left: 0.9rem;
+  border-left: 2px solid var(--champagne);
+  font-family: var(--font-read); font-style: italic;
+  font-size: 1rem; line-height: 1.65; color: var(--text-2);
+}
+.kept-card__foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+.kept-card__ref {
+  display: grid; gap: 0.15rem;
+  font: 500 0.78rem var(--font-ui); letter-spacing: 0.03em;
+  color: var(--text-3);
+}
+
+.leaf .kept-card__ref { color: rgba(74, 47, 28, 0.78); }
+.kept-card__date { font-weight: 400; }
+.kept-card__remove { flex-shrink: 0; width: 44px; height: 44px; color: rgba(74, 47, 28, 0.7); }
+.kept-card__remove svg { width: 18px; height: 18px; }
+
+/* the ledge everything rests on: lit top face, shaded front, a contact shadow */
+.ledge {
+  height: 16px;
+  margin: 1rem -0.5rem 0;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #f6ecd6 0 3px, #e3d0ad 3px, #d2bb94 100%);
+  box-shadow: var(--shadow-2);
+}
+
+/* ── An empty shelf in the sun ── */
+.shelf__empty {
+  display: grid; justify-items: center; text-align: center;
+  padding-top: 0.5rem;
+}
+.niche {
+  position: relative;
+  width: min(220px, 56%); aspect-ratio: 4 / 5;
+  border-radius: 50% 50% 4px 4px / 40% 40% 4px 4px;
+  background:
+    radial-gradient(ellipse 70% 45% at 66% 78%, rgba(255, 246, 222, 0.95), transparent 70%),
+    linear-gradient(165deg, #eadcc0 0%, #f2e8d4 55%, #f6efe0 100%);
+  box-shadow:
+    inset 12px 14px 22px rgba(var(--shade-rgb), 0.16),
+    inset -1px -1px 0 rgba(255, 255, 255, 0.7);
+}
+.niche__shaft {                  /* a band of sun falling in from the upper left */
+  position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(128deg, transparent 30%, rgba(255, 244, 214, 0.55) 46%, rgba(255, 244, 214, 0.2) 60%, transparent 74%);
+}
+.niche__sill {
+  position: absolute; left: -14%; right: -14%; bottom: -16px;
+  height: 16px; border-radius: 3px;
+  background: linear-gradient(180deg, #f6ecd6 0 3px, #e3d0ad 3px, #d2bb94 100%);
+  box-shadow: var(--shadow-2);
+}
+.shelf__line {
+  margin-top: 2.6rem; max-width: 27rem;
+  font-family: var(--font-read); font-size: 1.0625rem; line-height: 1.75;
+  color: var(--text-2);
+}
+.shelf__line strong { font-weight: 500; color: var(--text-1); }
+.shelf__empty .link-arrow { margin-top: 1rem; min-height: 44px; }
+
+/* ── The diary: a margin of dates and the first words of each conversation ── */
+.diary {
+  --margin: 4.6rem;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.diary::before {                 /* the margin rule */
+  content: '';
+  position: absolute; top: 0; bottom: 0; left: var(--margin);
+  width: 1px; background: rgba(227, 154, 59, 0.38);
+  pointer-events: none;
+}
+.diary__lines { position: relative; }
+.diary__lines li { list-style: none; }
+.diary__lines li + li .entry { border-top: 1px solid rgba(176, 129, 47, 0.14); }
+
+.entry {
+  display: grid;
+  grid-template-columns: var(--margin) minmax(0, 1fr) 2.75rem;
   align-items: center;
-  justify-content: center;
+  min-height: 68px;
+  padding: 0.85rem 0;
+  color: var(--text-1);
+  transition: background-color var(--dur-2) var(--ease-out);
 }
-
-.profile__login-card {
-  max-width: 480px;
-  margin: 0 auto;
-  padding: var(--space-3xl) var(--space-2xl);
-  text-align: center;
+.entry:hover { background-color: rgba(176, 129, 47, 0.05); }
+.entry:focus-visible { outline-offset: -3px; }
+.entry__date { text-align: center; padding-right: 0.25rem; }
+.entry__date time { display: grid; gap: 0.2rem; }
+.entry__day { font: 400 1.65rem/1 var(--font-display); color: var(--text-1); }
+.entry__month {
+  font: 500 0.66rem var(--font-ui); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold-ink);
 }
-
-.profile__login-icon {
-  width: 72px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto var(--space-lg);
-  border-radius: var(--radius-full);
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 153, 51, 0.05));
-  border: 1px solid var(--border-gold);
-  color: var(--divine-gold);
+.entry__body { display: grid; gap: 0.2rem; padding-left: 1.1rem; min-width: 0; }
+.entry__words {
+  font-family: var(--font-read); font-size: 1.0625rem; line-height: 1.5;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
 }
-
-.profile__login-title {
-  margin-bottom: var(--space-sm);
+.entry__meta { font-size: 0.8rem; color: var(--text-3); }
+.entry__arrow {
+  justify-self: center; width: 18px; height: 18px;
+  color: var(--gold-deep); opacity: 0.55;
+  transition: transform var(--dur-2) var(--ease-out), opacity var(--dur-2) var(--ease-out);
 }
+.entry:hover .entry__arrow,
+.entry:focus-visible .entry__arrow { opacity: 1; transform: translate3d(3px, 0, 0); }
 
-.profile__login-desc {
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: var(--space-xl);
+.diary__quiet {
+  position: relative;
+  padding: 1.5rem 1.25rem 1.6rem calc(var(--margin) + 1.1rem);
+  font-family: var(--font-read); font-size: 1.0625rem; line-height: 1.7;
+  color: var(--text-2);
 }
+.diary__quiet .link-arrow { margin-top: 0.75rem; min-height: 44px; }
+.diary__rule { display: block; height: 1px; margin-top: 1.9rem; background: rgba(176, 129, 47, 0.14); }
 
-.profile__features-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  margin-bottom: var(--space-xl);
-  text-align: left;
-}
-
-.profile__feature-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-sm);
-  background: var(--surface-glass);
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-}
-
-.profile__feature-icon {
-  color: var(--divine-gold);
-  flex-shrink: 0;
-}
-
-.profile__login-btn {
-  width: 100%;
-  justify-content: center;
-  margin-bottom: var(--space-md);
-}
-
-.profile__login-note {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-@media (max-width: 768px) {
-  .profile__login-card {
-    padding: var(--space-2xl) var(--space-lg);
-  }
+@media (max-width: 420px) {
+  .diary { --margin: 3.9rem; }
+  .entry { grid-template-columns: var(--margin) minmax(0, 1fr) 2.25rem; }
+  .entry__body { padding-left: 0.85rem; }
+  .diary__quiet { padding-right: 1rem; }
 }

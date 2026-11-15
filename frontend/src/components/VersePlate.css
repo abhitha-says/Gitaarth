@@ -1,0 +1,155 @@
+/* A verse on palm leaf.
+   One leaf for the whole site: the Library's pothi, the verse of the day on
+   Home, the verses inside answers. Lit from the sun at the upper left: the
+   lit edge is top-left, the leaf's thickness and its shadow fall lower right.
+   The letters are incised and ink-rubbed, so they sit in the cut with a thin
+   lit lip below them. */
+:root {
+  --palm-fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='200'%3E%3Cfilter id='a' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.005 0.35' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.28 0 0 0 0 0.11 1.25 0 0 0 -0.56'/%3E%3C/filter%3E%3Cfilter id='b' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0025 0.6' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.98 0 0 0 0 0.9 -1.3 0 0 0 0.6'/%3E%3C/filter%3E%3Cfilter id='c' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.04' numOctaves='2' seed='21' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.38 0 0 0 0 0.15 1.2 0 0 0 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
+  --leaf-ink: #3b2513;                       /* soot ink rubbed into the cuts */
+  --leaf-ink-2: #5a3a1f;                     /* small labels; 6:1 on the leaf */
+  --leaf-ink-3: rgba(59, 37, 19, 0.76);
+  --leaf-line: rgba(74, 47, 28, 0.36);       /* an incised hairline */
+  --leaf-lip: rgba(255, 250, 233, 0.85);     /* the lit lower lip of a cut */
+  --leaf-cut: 0 1px 0 rgba(255, 249, 228, 0.62);
+  --leaf-face:
+    radial-gradient(120% 95% at 10% 0%, rgba(255, 250, 230, 0.62), transparent 56%),
+    linear-gradient(90deg, rgba(146, 100, 42, 0.2), transparent 5%, transparent 95%, rgba(128, 86, 34, 0.26)),
+    radial-gradient(150% 130% at 50% 45%, transparent 62%, rgba(146, 100, 42, 0.16) 100%),
+    var(--palm-fibre),
+    linear-gradient(168deg, #f6ecd0 0%, #efe1b8 46%, #e6d3a3 100%);
+  --leaf-edge:
+    inset 1px 1px 0 rgba(255, 251, 236, 0.85),
+    inset -1px -2px 0 rgba(122, 84, 34, 0.24),
+    inset 0 0 0 1px rgba(122, 84, 34, 0.14);
+  --leaf-shape: 26px 20px 24px 18px / 44px 36px 40px 48px;
+}
+
+.verse {
+  /* hole distance from each end, hole radius, hairline inset */
+  --hx: clamp(13px, 2.6vw, 30px);
+  --hr: clamp(4px, 0.6vw, 5px);
+  --hl: 12px;
+  --ring: calc(var(--hr) * 2);  /* clear space kept around each hole */
+  position: relative;
+  margin: 0;
+  text-align: center;
+  padding: clamp(2.4rem, 4vw, 3.4rem) calc(var(--hx) + var(--ring) + 0.65rem);
+  border-radius: var(--leaf-shape);
+  color: var(--leaf-ink);
+  background:
+    /* two string holes, cut through: the ivory page shows in each, its upper-left
+       wall in shade, its lower-right lip catching the sun */
+    radial-gradient(circle at calc(var(--hx) + 0.9px) calc(50% + 0.9px), #f8f1e2 0 calc(var(--hr) - 0.5px), transparent calc(var(--hr) + 0.2px)),
+    radial-gradient(circle at calc(100% - var(--hx) + 0.9px) calc(50% + 0.9px), #f8f1e2 0 calc(var(--hr) - 0.5px), transparent calc(var(--hr) + 0.2px)),
+    radial-gradient(circle at var(--hx) 50%, rgba(84, 54, 28, 0.62) 0 var(--hr), transparent calc(var(--hr) + 0.8px)),
+    radial-gradient(circle at calc(100% - var(--hx)) 50%, rgba(84, 54, 28, 0.62) 0 var(--hr), transparent calc(var(--hr) + 0.8px)),
+    radial-gradient(circle at calc(var(--hx) + 0.9px) calc(50% + 0.9px), var(--leaf-lip) 0 calc(var(--hr) + 0.5px), transparent calc(var(--hr) + 1.5px)),
+    radial-gradient(circle at calc(100% - var(--hx) + 0.9px) calc(50% + 0.9px), var(--leaf-lip) 0 calc(var(--hr) + 0.5px), transparent calc(var(--hr) + 1.5px)),
+    /* incised hairlines along the top and the bottom, each with its lit lip */
+    linear-gradient(90deg, transparent, var(--leaf-line) 3%, var(--leaf-line) 97%, transparent) center var(--hl) / calc(100% - 2 * var(--hx)) 1px no-repeat,
+    linear-gradient(90deg, transparent, var(--leaf-lip) 3%, var(--leaf-lip) 97%, transparent) center calc(var(--hl) + 1px) / calc(100% - 2 * var(--hx)) 1px no-repeat,
+    linear-gradient(90deg, transparent, var(--leaf-line) 3%, var(--leaf-line) 97%, transparent) center calc(100% - var(--hl) - 1px) / calc(100% - 2 * var(--hx)) 1px no-repeat,
+    linear-gradient(90deg, transparent, var(--leaf-lip) 3%, var(--leaf-lip) 97%, transparent) center calc(100% - var(--hl)) / calc(100% - 2 * var(--hx)) 1px no-repeat,
+    var(--leaf-face);
+  box-shadow: var(--leaf-edge), var(--shadow-1), var(--shadow-2);
+}
+
+.verse__sanskrit {
+  display: flex; flex-direction: column; gap: 0.15em;
+  font-family: var(--font-sanskrit);
+  font-size: clamp(1.24rem, 1.06rem + 0.8vw, 1.62rem);
+  line-height: 1.8;
+  color: var(--leaf-ink);
+  text-shadow: var(--leaf-cut);
+  text-wrap: balance;
+}
+
+.verse .verse__ornament { margin: 1.3rem auto; max-width: 240px; color: rgba(74, 47, 28, 0.62); }
+.verse .ornament__line { background: linear-gradient(90deg, transparent, var(--leaf-line)); box-shadow: 0 1px 0 var(--leaf-lip); }
+.verse .ornament__line:last-child { background: linear-gradient(90deg, var(--leaf-line), transparent); }
+.verse .ornament__lotus { filter: drop-shadow(0 1px 0 var(--leaf-lip)); }
+
+.verse__meaning {
+  font-family: var(--font-read);
+  font-style: italic;
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.22rem);
+  line-height: 1.75;
+  color: var(--leaf-ink);
+  max-width: 36em;
+  margin-inline: auto;
+  text-wrap: pretty;
+}
+.verse__alt {
+  margin: 0.9rem auto 0;
+  max-width: 36em;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--leaf-ink-3);
+}
+
+.verse__ref {
+  display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.55rem;
+  margin-top: 1.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--leaf-ink-2);
+  text-shadow: var(--leaf-cut);
+}
+.verse__ref-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--leaf-ink-2); box-shadow: 0 1px 0 var(--leaf-lip); }
+
+/* Actions are pressed into the leaf, not stuck on top of it */
+.verse__actions {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+  margin-top: 1.6rem;
+}
+.verse__action {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  min-height: 44px;
+  padding: 0 1.05rem;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(74, 47, 28, 0.26);
+  background: rgba(255, 251, 236, 0.4);
+  box-shadow: inset 1px 1px 0 rgba(255, 252, 240, 0.7), inset -1px -1px 0 rgba(122, 84, 34, 0.12);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--leaf-ink-2);
+  transition: background-color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+}
+.verse__action svg { width: 16px; height: 16px; flex-shrink: 0; }
+.verse__action:hover { background: rgba(255, 252, 242, 0.82); border-color: rgba(74, 47, 28, 0.42); color: var(--leaf-ink); }
+.verse__action:active { background: rgba(122, 84, 34, 0.08); box-shadow: inset 1px 1px 2px rgba(122, 84, 34, 0.2); }
+.verse__action.is-on { color: var(--rosewood); border-color: rgba(90, 52, 36, 0.45); background: rgba(90, 52, 36, 0.07); }
+.verse__action--primary { color: var(--rosewood); border-color: rgba(90, 52, 36, 0.5); }
+.verse__action--primary:hover { color: var(--rosewood); border-color: rgba(90, 52, 36, 0.7); }
+.verse__action:focus-visible { outline-color: var(--rosewood); }
+
+/* Sizes */
+.verse--lg {
+  --hx: clamp(13px, 3vw, 38px);
+  --hr: clamp(3.5px, 0.7vw, 6px);
+  --hl: 14px;
+  padding-block: clamp(2.6rem, 5vw, 4rem);
+}
+.verse--lg .verse__sanskrit { font-size: clamp(1.26rem, 1rem + 1.4vw, 2.05rem); }
+.verse--lg .verse__meaning { font-size: clamp(1.0625rem, 1rem + 0.55vw, 1.4rem); }
+
+.verse--sm {
+  --hx: 12px;
+  --hr: 3px;
+  --hl: 9px;
+  --leaf-shape: 18px 14px 16px 12px / 30px 24px 28px 34px;
+  padding: 1.7rem calc(var(--hx) + var(--ring) + 0.55rem) 1.6rem;
+}
+.verse--sm .verse__sanskrit { font-size: 1.14rem; line-height: 1.75; }
+.verse.verse--sm .verse__ornament { margin: 0.9rem auto; max-width: 170px; }
+.verse--sm .verse__meaning { font-size: 1.0625rem; line-height: 1.7; }
+.verse--sm .verse__ref { margin-top: 0.9rem; font-size: 0.68rem; }
+
+/* Ornament (shared) */
+.ornament { display: flex; align-items: center; gap: 0.9rem; color: var(--gold-deep); }
+.ornament__line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(176, 129, 47, 0.45)); }
+.ornament__line:last-child { background: linear-gradient(90deg, rgba(176, 129, 47, 0.45), transparent); }
+.ornament__lotus { flex-shrink: 0; opacity: 0.9; }

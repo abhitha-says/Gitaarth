@@ -5,10 +5,24 @@
 
 import { Router } from 'express';
 import { isDBConnected } from '../config/db.js';
+import { optionalAuth, attachOwner } from '../middleware/auth.js';
 import ChatSession from '../models/ChatSession.js';
 import Message from '../models/Message.js';
 
 const router = Router();
+
+/* Every route below is scoped to the caller. Without this, one browser's
+   sidebar would list every conversation on the server. */
+router.use(optionalAuth, attachOwner);
+
+/** Reject anonymous callers — with no owner key there is nothing to scope to. */
+function requireOwner(req, res) {
+  if (!req.ownerKey) {
+    res.status(400).json({ error: 'Missing identity. Sign in or send an X-Guest-Id header.' });
+    return false;
+  }
+  return true;
+}
 
 /**
  * GET /api/sessions
@@ -20,13 +34,14 @@ router.get('/', async (req, res) => {
     if (!isDBConnected()) {
       return res.status(503).json({ error: 'Database not connected' });
     }
+    if (!requireOwner(req, res)) return;
 
     const page = Math.max(1, parseInt(req.query.page) || 1);
     const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 20));
     const showArchived = req.query.archived === 'true';
     const skip = (page - 1) * limit;
 
-    const filter = { isArchived: showArchived };
+    const filter = { ownerKey: req.ownerKey, isArchived: showArchived };
 
     const [sessions, total] = await Promise.all([
       ChatSession.find(filter)
@@ -62,17 +77,17 @@ router.get('/:sessionId', async (req, res) => {
       return res.status(503).json({ error: 'Database not connected' });
     }
 
+    if (!requireOwner(req, res)) return;
     const { sessionId } = req.params;
 
-    const [session, messages] = await Promise.all([
-      ChatSession.findOne({ sessionId }).lean(),
-      Message.find({ sessionId }).sort({ timestamp: 1 }).lean(),
-    ]);
-
+    // Scope the lookup itself — never fetch then check, or a wrong owner still
+    // learns the session exists.
+    const session = await ChatSession.findOne({ sessionId, ownerKey: req.ownerKey }).lean();
     if (!session) {
       return res.status(404).json({ error: 'Session not found' });
     }
 
+    const messages = await Message.find({ sessionId }).sort({ timestamp: 1 }).lean();
     res.json({ session, messages });
   } catch (err) {
     console.error('❌ Session fetch error:', err.message);
@@ -90,6 +105,7 @@ router.patch('/:sessionId', async (req, res) => {
       return res.status(503).json({ error: 'Database not connected' });
     }
 
+    if (!requireOwner(req, res)) return;
     const { sessionId } = req.params;
     const { title, isArchived } = req.body;
 
@@ -102,7 +118,7 @@ router.patch('/:sessionId', async (req, res) => {
     }
 
     const session = await ChatSession.findOneAndUpdate(
-      { sessionId },
+      { sessionId, ownerKey: req.ownerKey },
       { $set: updates },
       { new: true, lean: true }
     );
@@ -128,10 +144,11 @@ router.delete('/:sessionId', async (req, res) => {
       return res.status(503).json({ error: 'Database not connected' });
     }
 
+    if (!requireOwner(req, res)) return;
     const { sessionId } = req.params;
 
     const session = await ChatSession.findOneAndUpdate(
-      { sessionId },
+      { sessionId, ownerKey: req.ownerKey },
       { $set: { isArchived: true } },
       { new: true, lean: true }
     );

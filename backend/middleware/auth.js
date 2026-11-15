@@ -46,3 +46,35 @@ export function optionalAuth(req, _res, next) {
   }
   next();
 }
+
+/* ─────────── Owner identity ─────────── */
+
+/** Guest ids are client-generated UUIDs; anything else is not trusted as a key. */
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/**
+ * attachOwner — resolves the stable key that long-term memory hangs off.
+ *
+ * Signed in  → "user:<mongoId>"  (survives device changes)
+ * Guest      → "guest:<uuid>"    (survives new chats on the same browser)
+ * Neither    → null              (no persistence, chat still works)
+ *
+ * Run this AFTER optionalAuth. A signed-in user always wins over the guest
+ * header, so signing in cannot be spoofed away by a forged X-Guest-Id.
+ */
+export function attachOwner(req, _res, next) {
+  if (req.userId) {
+    req.ownerKey = `user:${req.userId}`;
+    req.ownerType = 'user';
+  } else {
+    const guestId = req.headers['x-guest-id'];
+    if (typeof guestId === 'string' && UUID_RE.test(guestId)) {
+      req.ownerKey = `guest:${guestId.toLowerCase()}`;
+      req.ownerType = 'guest';
+    } else {
+      req.ownerKey = null;
+      req.ownerType = 'anonymous';
+    }
+  }
+  next();
+}

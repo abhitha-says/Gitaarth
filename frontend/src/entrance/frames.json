@@ -1,0 +1,103 @@
+{
+  "size": [
+    1280,
+    720
+  ],
+  "count": 325,
+  "webpStep": 2,
+  "shots": [
+    {
+      "id": "arrive",
+      "start": 0,
+      "count": 105,
+      "fps": 24,
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "share": null,
+      "from": 8.25,
+      "to": 12.62
+    },
+    {
+      "id": "reveal",
+      "start": 105,
+      "count": 28,
+      "fps": 12,
+      "focus": [
+        0.48,
+        0.52
+      ],
+      "share": 0.12,
+      "from": 12.71,
+      "to": 15.0
+    },
+    {
+      "id": "finger",
+      "start": 133,
+      "count": 33,
+      "fps": 12,
+      "focus": [
+        0.36,
+        0.44
+      ],
+      "share": 0.16,
+      "from": 24.0,
+      "to": 26.75
+    },
+    {
+      "id": "conch",
+      "start": 166,
+      "count": 36,
+      "fps": 12,
+      "focus": [
+        0.62,
+        0.55
+      ],
+      "share": 0.16,
+      "from": 26.83,
+      "to": 29.75
+    },
+    {
+      "id": "ignite",
+      "start": 202,
+      "count": 66,
+      "fps": 12,
+      "focus": [
+        0.44,
+        0.54
+      ],
+      "share": 0.24,
+      "from": 0.0,
+      "to": 5.42
+    },
+    {
+      "id": "form",
+      "start": 268,
+      "count": 33,
+      "fps": 12,
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "share": 0.18,
+      "from": 5.46,
+      "to": 8.17
+    },
+    {
+      "id": "light",
+      "start": 301,
+      "count": 24,
+      "fps": 12,
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "share": 0.14,
+      "from": 22.0,
+      "to": 23.92
+    }
+  ],
+  "source": "IMG_9090.MP4",
+  "hero": 7.3
+}

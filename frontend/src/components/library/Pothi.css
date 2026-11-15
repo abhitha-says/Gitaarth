@@ -1,0 +1,189 @@
+/* The pothi: a bundle of palm leaves between two rosewood covers.
+   The leaf surface comes from VersePlate.css (--leaf-face, --leaf-edge),
+   so every leaf on the site is the same leaf. */
+.pothi {
+  --wood-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='120'%3E%3Cfilter id='a' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0025 0.25' numOctaves='4' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.86 0 0 0 0 0.62 0 0 0 0 0.45 2 0 0 0 -0.88'/%3E%3C/filter%3E%3Cfilter id='b' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.005 0.5' numOctaves='2' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.08 0 0 0 0 0.05 -2 0 0 0 0.95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
+  --hx: 88px;                 /* string hole, distance from each end */
+  --hr: 5px;                  /* hole radius */
+  --ring: 11px;               /* incised ring kept clear around the hole */
+  --pad: 18px;
+  --gap: 6px;
+  --cord: repeating-linear-gradient(-30deg, rgba(255, 214, 168, 0.4) 0 1px, transparent 1px 3.4px), linear-gradient(90deg, #c46c3a 0%, #a24a25 55%, #7f3519 100%);
+  --pleaf-shape: 22px 18px 20px 16px / 50% 44% 50% 56%;
+  position: relative;
+  width: min(1040px, 100%);
+  margin-inline: auto;
+  padding-block: 0 8px;
+}
+.pothi--arrive { animation: pothi-in var(--dur-3) var(--ease-out) both; }
+@keyframes pothi-in { from { opacity: 0; transform: translate3d(0, 14px, 0); } }
+
+/* The cord, threaded down through every leaf: seen in the gaps and through the holes */
+.pothi__cord {
+  position: absolute; z-index: 0;
+  top: 17px; bottom: 25px;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--cord);
+  box-shadow: 1px 1px 1px rgba(var(--shade-rgb), 0.28);
+  transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
+}
+.pothi__cord--l { left: calc(var(--hx) - 2px); }
+.pothi__cord--r { right: calc(var(--hx) - 2px); }
+
+/* Rosewood covers: the only dark in the room, and only a sliver of it */
+.pothi__cover {
+  position: relative; z-index: 2;
+  height: 34px;
+  border-radius: 22px 20px 24px 18px / 50% 46% 54% 50%;
+  background:
+    radial-gradient(circle at var(--hx) 50%, #24120a 0 4px, rgba(36, 18, 10, 0) 5px),
+    radial-gradient(circle at calc(100% - var(--hx)) 50%, #24120a 0 4px, rgba(36, 18, 10, 0) 5px),
+    linear-gradient(90deg, transparent 20px, rgba(238, 196, 140, 0.3) 20px calc(100% - 20px), transparent calc(100% - 20px)) center 20% / 100% 1px no-repeat,
+    linear-gradient(90deg, transparent 20px, rgba(238, 196, 140, 0.24) 20px calc(100% - 20px), transparent calc(100% - 20px)) center 80% / 100% 1px no-repeat,
+    radial-gradient(120% 160% at 18% 0%, rgba(255, 214, 170, 0.22), transparent 60%),
+    var(--wood-grain),
+    linear-gradient(176deg, #7e4d34 0%, var(--rosewood) 52%, #482819 100%);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 216, 178, 0.38),
+    inset -1px -2px 0 rgba(28, 12, 6, 0.4),
+    var(--shadow-1), var(--shadow-2);
+}
+.pothi__cover--top { margin-bottom: 8px; }
+.pothi__cover--bottom { margin-top: 8px; height: 28px; }
+
+/* The ties: from each hole along the cover to the bow at the middle */
+.pothi__tie {
+  position: absolute; top: calc(50% - 2px);
+  height: 4px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(62deg, rgba(255, 214, 168, 0.42) 0 1px, transparent 1px 3.6px), linear-gradient(180deg, #c87040 0%, #a24a25 55%, #7f3519 100%);
+  box-shadow: 1px 2px 1px rgba(20, 8, 4, 0.4);
+  transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
+}
+.pothi__tie--l { left: var(--hx); right: calc(50% + 4px); transform-origin: left center; }
+.pothi__tie--r { right: var(--hx); left: calc(50% + 4px); transform-origin: right center; }
+.pothi__knot {
+  position: absolute; left: 50%; top: -4px;
+  width: 58px; height: 76px;
+  margin-left: -29px;
+  overflow: visible;
+  transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
+}
+
+/* Untying: the bow comes loose and the cord slackens, then the leaf is drawn out */
+.pothi.is-untied .pothi__knot { opacity: 0; transform: translate3d(0, -6px, 0) scale(0.9); }
+.pothi.is-untied .pothi__tie { opacity: 0; transform: scaleX(0.4); }
+.pothi.is-untied .pothi__cord { opacity: 0; transform: translate3d(0, 10px, 0); }
+
+.pothi__leaves { position: relative; z-index: 1; display: grid; gap: var(--gap); }
+
+/* One leaf of the bundle. The li carries the leaf's shadow on the ground;
+   the face is the leaf itself, with its two holes cut clean through (mask),
+   so the cord shows inside them. */
+.pleaf {
+  --hxl: calc(var(--hx) - var(--el, 0px));
+  --hxr: calc(var(--hx) - var(--er, 0px));
+  --zone-l: calc(var(--hxl) - var(--ring) - var(--pad) - 6px);
+  --zone-r: calc(var(--hxr) - var(--ring) - var(--pad) - 6px);
+  position: relative;
+  margin-left: var(--el, 0px);
+  margin-right: var(--er, 0px);
+  border-radius: var(--pleaf-shape);
+  box-shadow: var(--shadow-1), var(--shadow-2);
+}
+.pleaf::before {
+  /* the longer shadow of a lifted leaf, faded in rather than repainted */
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--shadow-3);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+.pleaf__face {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: var(--zone-l) minmax(0, 1fr) var(--zone-r);
+  column-gap: calc(2 * var(--ring) + 12px);
+  align-items: center;
+  width: 100%;
+  min-height: 88px;
+  padding: 15px var(--pad);
+  border-radius: inherit;
+  text-align: left;
+  color: var(--leaf-ink);
+  background:
+    radial-gradient(circle at calc(var(--hxl) + 0.8px) calc(50% + 0.8px), var(--leaf-lip) 0 calc(var(--hr) + 0.6px), transparent calc(var(--hr) + 1.6px)),
+    radial-gradient(circle at calc(100% - var(--hxr) + 0.8px) calc(50% + 0.8px), var(--leaf-lip) 0 calc(var(--hr) + 0.6px), transparent calc(var(--hr) + 1.6px)),
+    radial-gradient(circle at calc(var(--hxl) - 0.6px) calc(50% - 0.6px), rgba(92, 60, 28, 0.55) 0 calc(var(--hr) + 0.6px), transparent calc(var(--hr) + 1.6px)),
+    radial-gradient(circle at calc(100% - var(--hxr) - 0.6px) calc(50% - 0.6px), rgba(92, 60, 28, 0.55) 0 calc(var(--hr) + 0.6px), transparent calc(var(--hr) + 1.6px)),
+    linear-gradient(90deg, transparent, var(--leaf-line) 2%, var(--leaf-line) 98%, transparent) center 8px / calc(100% - 28px) 1px no-repeat,
+    linear-gradient(90deg, transparent, var(--leaf-lip) 2%, var(--leaf-lip) 98%, transparent) center 9px / calc(100% - 28px) 1px no-repeat,
+    linear-gradient(90deg, transparent, var(--leaf-line) 2%, var(--leaf-line) 98%, transparent) center calc(100% - 9px) / calc(100% - 28px) 1px no-repeat,
+    linear-gradient(90deg, transparent, var(--leaf-lip) 2%, var(--leaf-lip) 98%, transparent) center calc(100% - 8px) / calc(100% - 28px) 1px no-repeat,
+    linear-gradient(rgba(140, 96, 40, var(--age, 0)), rgba(140, 96, 40, var(--age, 0))),
+    var(--leaf-face);
+  box-shadow: var(--leaf-edge);
+  -webkit-mask:
+    radial-gradient(circle at var(--hxl) 50%, transparent var(--hr), #000 calc(var(--hr) + 0.6px)),
+    radial-gradient(circle at calc(100% - var(--hxr)) 50%, transparent var(--hr), #000 calc(var(--hr) + 0.6px));
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle at var(--hxl) 50%, transparent var(--hr), #000 calc(var(--hr) + 0.6px)),
+    radial-gradient(circle at calc(100% - var(--hxr)) 50%, transparent var(--hr), #000 calc(var(--hr) + 0.6px));
+  mask-composite: intersect;
+  transition: transform var(--dur-2) var(--ease-out), opacity var(--dur-2) var(--ease-out);
+}
+button.pleaf__face { cursor: pointer; }
+.pleaf__face:focus-visible { outline: 2px solid var(--rosewood); outline-offset: -7px; border-radius: inherit; }
+
+/* Under the pointer or a finger the leaf rises a little and its shadow lengthens */
+@media (hover: hover) {
+  .pleaf:hover > button.pleaf__face { transform: translate3d(5px, -2px, 0); }
+  .pleaf:hover:has(> button)::before { opacity: 1; }
+}
+.pleaf:has(> button:focus-visible)::before,
+.pleaf:has(> button:active)::before { opacity: 1; }
+.pleaf > button.pleaf__face:focus-visible { transform: translate3d(5px, -2px, 0); }
+.pleaf > button.pleaf__face:active { transform: translate3d(3px, -2px, 0); transition-duration: var(--dur-1); }
+
+/* Drawn out of the bundle once the cord is loose */
+.pleaf.is-drawn::before { opacity: 1; }
+.pleaf.is-drawn > .pleaf__face { transform: translate3d(64px, -4px, 0); transition-duration: 300ms; transition-delay: 60ms; }
+.pothi.is-untied .pleaf:not(.is-drawn) > .pleaf__face { opacity: 0.7; }
+
+/* What is written on it: three fields, as on a real leaf, divided by the holes */
+.pleaf__num, .pleaf__count { display: flex; flex-direction: column; align-items: center; gap: 6px; line-height: 1; min-width: 0; }
+.pleaf__dev { font-size: 1.95rem; color: var(--leaf-ink); text-shadow: var(--leaf-cut); }
+.pleaf__roman { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; color: var(--leaf-ink-2); }
+.pleaf__main { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; column-gap: 2rem; min-width: 0; }
+.pleaf__names { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.pleaf__name { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; line-height: 1.12; color: var(--leaf-ink); text-shadow: var(--leaf-cut); }
+.pleaf__sa { font-size: 1.08rem; line-height: 1.55; color: var(--leaf-ink-2); text-shadow: var(--leaf-cut); }
+.pleaf__theme { font-family: var(--font-read); font-style: italic; font-size: 1.06rem; line-height: 1.45; color: var(--leaf-ink-3); }
+.pleaf__count b { font-family: var(--font-display); font-size: 1.55rem; font-weight: 600; color: var(--leaf-ink); text-shadow: var(--leaf-cut); }
+.pleaf__count span { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; color: var(--leaf-ink-2); }
+
+@media (max-width: 1000px) {
+  .pothi { --hx: 70px; --hr: 4.5px; --ring: 9.5px; --pad: 12px; }
+  .pleaf__main { grid-template-columns: 1fr; row-gap: 2px; }
+}
+@media (max-width: 640px) {
+  .pothi { --hx: 56px; --hr: 4px; --ring: 8px; --pad: 8px; --gap: 5px; }
+  .pothi__cover { height: 26px; }
+  .pothi__cover--bottom { height: 22px; }
+  .pothi__cord { top: 13px; bottom: 19px; }
+  .pleaf__face { column-gap: calc(2 * var(--ring) + 8px); min-height: 92px; padding-block: 13px; }
+  .pleaf { --zone-l: calc(var(--hxl) - var(--ring) - var(--pad) - 4px); --zone-r: calc(var(--hxr) - var(--ring) - var(--pad) - 4px); }
+  .pleaf__dev { font-size: 1.4rem; }
+  .pleaf__name { font-size: 1.28rem; }
+  .pleaf__sa { font-size: 0.98rem; }
+  .pleaf__theme { font-size: 0.95rem; }
+  .pleaf__count b { font-size: 1.2rem; }
+  .pleaf__count span { letter-spacing: 0; }
+}
+@media (max-width: 640px) {
+  .pothi__cover--top { margin-bottom: 12px; }
+  .pothi__knot { width: 40px; height: 52px; margin-left: -20px; top: -3px; }
+}

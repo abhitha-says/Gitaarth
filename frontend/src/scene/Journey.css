@@ -1,0 +1,282 @@
+/* The walk to Krishna: one pinned stage, the page's scroll is the camera. */
+
+@property --ink { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+
+.journey { position: relative; height: 560svh; background: var(--bg); }
+.journey--lighter { height: 500svh; }
+
+.j-stage {
+  position: sticky; top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  contain: layout paint;
+}
+.j-layer { position: absolute; inset: 0; pointer-events: none; will-change: transform, opacity; }
+
+/* ── The land and the light ── */
+.j-plate picture, .j-plate img { width: 100%; height: 100%; }
+.j-plate img { object-fit: cover; object-position: 30% 50%; }
+.j-plate__bare {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 46%, #efe6d2 55%, #e3dcc0 59%, #e9e2c9 66%, #f2ebd9 82%, var(--bg) 100%);
+}
+.j-sun::before {
+  content: '';
+  position: absolute; left: 50%; top: 50%;
+  width: 150vmax; height: 150vmax;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 249, 232, 0.98) 0, rgba(255, 240, 206, 0.72) 4%, rgba(253, 230, 188, 0.34) 13%, rgba(251, 228, 190, 0.12) 26%, rgba(251, 228, 190, 0) 42%);
+}
+.j-veil { background: var(--bg); }
+.j-flare {
+  inset: -20svh -45vw;
+  background: radial-gradient(circle at 50% 50%, #fffdf6 0, #fff6e2 22%, rgba(255, 240, 210, 0.85) 45%, rgba(251, 247, 238, 0.7) 75%);
+}
+.j-face { position: relative; display: block; }
+.j-face__closed { position: absolute; inset: 0; }
+.j-face__closed .living { height: 100% !important; }
+
+/* ── Figures ── */
+.j-fig { display: flex; justify-content: center; }
+.j-fig .living { flex: none; }
+.j-fig--arjuna { align-items: flex-end; justify-content: flex-start; padding: 0 0 30svh 6vw; }
+.j-fig--arjuna .living { height: min(40svh, 78vw); }
+.j-fig--feet { align-items: flex-end; padding-bottom: 13svh; }
+.j-fig--feet .living { height: min(60svh, 104vw); }
+.j-fig--feet.is-plate { padding: 0; }
+.j-fig--feet.is-plate .living {
+  width: max(100vw, 150svh); height: auto;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 34%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 34%);
+}
+.j-fig--body { align-items: flex-start; }
+/* The face is kept for its own picture: in the passage it stays lost in the mist above the frame */
+.j-veil-top {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, transparent 8svh, #000 30svh);
+  mask-image: linear-gradient(180deg, transparent 0, transparent 8svh, #000 30svh);
+}
+.j-fig--body .living { height: 140svh; }
+.j-fig--face { align-items: flex-start; padding-top: 10svh; transform-origin: 50% 0; }
+.j-fig--face .living { height: min(70svh, 124vw); }
+
+.j-grass { top: auto; bottom: -5svh; height: 36svh; }
+.grass {
+  width: 100%; height: 100%;
+  filter: blur(7px);
+  transform-origin: 50% 100%;
+  animation: grass-sway var(--wind-1) ease-in-out infinite alternate;
+}
+.grass--painted { object-fit: cover; object-position: 50% 100%; filter: none; }
+@keyframes grass-sway { from { transform: skewX(-1.6deg); } to { transform: skewX(1.8deg); } }
+.j-dust { z-index: 1; }
+
+/* ── Words ── */
+.j-cap, .j-ask {
+  position: absolute; left: 0; right: 0; z-index: 2;
+  margin-inline: auto;
+  width: min(38rem, 100% - 2 * var(--gutter));
+  text-align: center;
+  pointer-events: none;
+}
+.j-cap:not(.is-on) > *, .j-ask:not(.is-on) > * { transition-duration: 420ms; transition-delay: 0ms; }
+.j-cap--title { top: 27svh; }
+.j-cap--low { bottom: 19svh; }
+/* Words stand in a bank of mist, so they never fight the picture */
+.j-cap--low::before, .j-cap--verse::before {
+  content: '';
+  position: absolute; inset: -34% -22%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(251, 247, 238, 0.86), rgba(251, 247, 238, 0.6) 55%, rgba(251, 247, 238, 0));
+  opacity: 0;
+  transition: opacity 900ms linear;
+}
+.j-cap--low.is-on::before, .j-cap--verse.is-on::before { opacity: 1; }
+
+.j-title { font-size: clamp(2.7rem, 10.4vw, 5.8rem); font-weight: 300; line-height: 1.05; }
+.j-title span { display: block; }
+.j-line {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 6.2vw, 2.7rem);
+  font-weight: 400; line-height: 1.2;
+  color: var(--ink-900);
+}
+.j-line em { font-style: italic; color: var(--gold-ink); }
+.j-quote {
+  font-family: var(--font-read); font-style: italic;
+  font-size: clamp(1.1rem, 4.4vw, 1.3rem); line-height: 1.7;
+  color: var(--ink-900);
+}
+.j-ref {
+  margin-top: 0.7rem;
+  font-family: var(--font-ui); font-size: var(--fs-label); font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.j-cap--quote .j-line { margin-top: 1.3rem; }
+
+.j-cap--verse { top: 45svh; }
+.j-verse { font-size: clamp(1.28rem, 5.4vw, 1.85rem); line-height: 1.95; color: var(--ink-900); }
+.j-verse span {
+  display: block;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(var(--ink) - 14%), transparent var(--ink));
+  mask-image: linear-gradient(90deg, #000 calc(var(--ink) - 14%), transparent var(--ink));
+  transition: --ink 0s linear 420ms;
+}
+.j-cap.is-on .j-verse span {
+  --ink: 116%;
+  transition: --ink 1300ms cubic-bezier(0.45, 0.05, 0.55, 0.95) calc(350ms + var(--n) * 1000ms);
+}
+.j-meaning {
+  margin-top: 1rem;
+  font-family: var(--font-read); font-size: clamp(1.0625rem, 4.3vw, 1.2rem); line-height: 1.75;
+  color: var(--text-2);
+}
+
+/* ── The question, and the place to answer it ── */
+.j-ask { bottom: max(9svh, 4.5rem); pointer-events: none; }
+.j-ask.is-on { pointer-events: auto; }
+.j-ask__q { font-size: clamp(2rem, 7.8vw, 3.3rem); font-weight: 400; line-height: 1.12; color: var(--ink-900); }
+.j-ask__q em { font-style: italic; color: var(--gold-ink); }
+.j-ask__form { margin-top: 1.4rem; }
+.j-ask__box {
+  position: relative;
+  display: flex; align-items: center;
+  min-height: 3.5rem;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.94);
+  border: 1px solid rgba(160, 120, 60, 0.28);
+  box-shadow: var(--shadow-2);
+  transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+.j-ask__box:focus-within { border-color: rgba(176, 128, 52, 0.62); box-shadow: var(--shadow-2), 0 0 0 4px rgba(217, 190, 138, 0.28); }
+.j-ask__box input {
+  flex: 1; min-width: 0;
+  padding: 0.9rem 0.5rem 0.9rem 2.6rem;
+  border: 0; background: none; outline: none;
+  font-family: var(--font-read); font-size: max(1.0625rem, 16px);
+  color: var(--ink-900);
+  caret-color: var(--saffron);
+}
+.j-ask__box input::placeholder { color: var(--text-3, #8a7a66); opacity: 1; }
+.j-ask__go {
+  flex: none;
+  display: grid; place-items: center;
+  width: 2.75rem; height: 2.75rem; margin-right: 0.4rem;
+  border: 0; border-radius: 50%;
+  background: var(--metal);
+  box-shadow: var(--metal-edge), var(--shadow-1);
+  color: #3d2a12; cursor: pointer;
+  touch-action: manipulation;
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.j-ask__go svg { width: 1.15rem; height: 1.15rem; }
+.j-ask__go:active { transform: scale(0.94); }
+.j-ask__paths {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+  margin: 1.1rem 0 0; padding: 0; list-style: none;
+}
+.j-ask__paths button {
+  min-height: 44px; padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(160, 120, 60, 0.24);
+  background: rgba(255, 253, 248, 0.78);
+  font-family: var(--font-ui); font-size: 0.875rem; color: var(--ink-700, #4b3a28);
+  cursor: pointer; touch-action: manipulation;
+  transition: background var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out);
+}
+.j-ask__paths button:hover { background: #fffdf8; border-color: rgba(176, 128, 52, 0.5); }
+.j-ask__paths li:nth-child(n + 5) { display: none; }
+.j-ask__note { margin-top: 0.9rem; font-family: var(--font-ui); font-size: var(--fs-label); letter-spacing: 0.06em; color: var(--text-2); }
+
+/* ── The seeker: a small warm light that becomes the caret ── */
+.j-seeker { position: absolute; left: 50%; top: 90%; z-index: 3; pointer-events: none; }
+.j-seeker__light {
+  position: absolute; left: -9px; top: -9px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: radial-gradient(circle, #fffaf0 0, #ffe3a8 38%, rgba(240, 180, 90, 0.45) 62%, rgba(240, 180, 90, 0) 72%);
+  animation: seeker-breathe 4.5s ease-in-out infinite;
+  transition: transform var(--dur-camera) var(--ease-camera), width var(--dur-camera) var(--ease-camera),
+    height var(--dur-camera) var(--ease-camera), border-radius var(--dur-camera) var(--ease-camera),
+    opacity 300ms var(--ease-out), left var(--dur-camera) var(--ease-camera), top var(--dur-camera) var(--ease-camera);
+}
+.j-seeker__light.is-caret {
+  left: -1px; top: -12px; width: 2px; height: 24px; border-radius: 1px;
+  background: var(--saffron);
+  animation: seeker-blink 1.1s steps(1) 1.6s infinite;
+}
+.j-seeker__light.is-gone { opacity: 0; animation: none; }
+@keyframes seeker-breathe { 0%, 100% { scale: 0.85; opacity: 0.8; } 50% { scale: 1.15; opacity: 1; } }
+@keyframes seeker-blink { 50% { opacity: 0; } }
+
+/* ── Way-finding ── */
+.j-foot {
+  position: absolute; left: 0; right: 0; bottom: max(1.2rem, env(safe-area-inset-bottom));
+  z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+  transition: opacity 600ms var(--ease-out);
+}
+.j-foot.is-done { opacity: 0; pointer-events: none; }
+.j-foot__cue {
+  font-family: var(--font-ui); font-size: var(--fs-label); letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold-ink);
+  opacity: 0; transition: opacity 500ms linear;
+}
+.j-foot.is-start .j-foot__cue { opacity: 0.85; transition: opacity 1200ms linear 2400ms; }
+.j-foot__skip {
+  min-height: 44px; padding: 0 1rem;
+  border: 0; background: none;
+  font-family: var(--font-ui); font-size: 0.8125rem; color: var(--text-2);
+  text-decoration: underline; text-underline-offset: 0.25em; text-decoration-color: rgba(160, 120, 60, 0.35);
+  cursor: pointer;
+}
+
+/* ── Wide screens: he stands to the left, the words to his right ── */
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .j-cap--verse, .j-ask { left: 44vw; right: 4vw; width: auto; max-width: 36rem; margin: 0; }
+  .j-cap--verse { top: 30svh; }
+  .j-ask { bottom: auto; top: 26svh; }
+  .j-ask__paths li:nth-child(n + 5) { display: list-item; }
+  .j-ask__paths { justify-content: flex-start; }
+  .j-cap--verse, .j-ask { text-align: left; }
+  .j-fig--feet .living { height: min(64svh, 66vw); }
+}
+
+/* Phones: the face sits high and small enough that words below never cross it */
+@media (max-width: 899px), (max-aspect-ratio: 1/1) {
+  .j-cap--verse { top: auto; bottom: 16svh; }
+  .j-fig--body .living { height: 118svh; }
+}
+
+.journey--lighter .j-seeker__light { animation: none; }
+.journey--lighter .grass { animation: none; filter: blur(5px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .j-seeker__light, .grass { animation: none !important; }
+}
+
+/* ── The still morning (reduced motion) ── */
+.j-still { position: relative; overflow: hidden; isolation: isolate; padding: calc(var(--nav-h, 4.5rem) + 2rem) 0 4rem; }
+.j-still__land { position: absolute; inset: 0; z-index: -1; }
+.j-still__land img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+.j-still__sun {
+  position: absolute; left: 24%; top: 12%;
+  width: 120vmax; height: 120vmax; transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 249, 232, 0.9) 0, rgba(253, 230, 188, 0.3) 12%, rgba(251, 228, 190, 0) 38%);
+}
+.j-still__inner {
+  width: min(1180px, 100% - 2 * var(--gutter)); margin-inline: auto;
+  display: grid; gap: 2rem; align-items: center; justify-items: center;
+}
+.j-still__face .living { height: min(46svh, 80vw); }
+.j-still__words { text-align: center; max-width: 38rem; }
+.j-still__words .j-title { font-size: clamp(2.3rem, 8.6vw, 3.6rem); }
+.j-still__quote { margin: 1.8rem 0 0; }
+.j-still .j-ask { position: static; width: auto; margin-top: 2.4rem; text-align: inherit; }
+.j-still .j-ask__paths li:nth-child(n + 5) { display: list-item; }
+@media (min-width: 900px) {
+  .j-still__inner { grid-template-columns: 0.9fr 1.1fr; min-height: calc(100svh - 8rem); }
+  .j-still__face .living { height: min(76svh, 46vw); }
+  .j-still__words { text-align: left; justify-self: start; }
+  .j-still .j-ask__paths { justify-content: flex-start; }
+}

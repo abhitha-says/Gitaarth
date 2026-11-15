@@ -1,0 +1,241 @@
+/* The entrance: the film on a dark stage, ending in the site's ivory morning.
+   The picture is shown as it is: no grade, no vignette, nothing written over it. */
+
+.ent {
+  --deep: #020101;
+  --gilt: #e6cd96;
+  --ivory-text: #f7f0e1;
+  position: relative;
+  height: 720svh;
+  background: var(--deep);
+}
+.ent--portrait { height: 620svh; }
+
+.ent__stage {
+  position: sticky; top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--deep);
+  transition: background-color 900ms linear;
+}
+.ent__stage.is-bright { background: var(--bg); }
+
+/* ── The film ── */
+.ent__film {
+  position: absolute; inset: 0;
+  display: block; width: 100%; height: 100%;
+  object-fit: cover;
+}
+.ent__ambient { display: none; }
+
+/* Phones: a 4:5 window of the film (it pans across the wide frame as you scroll),
+   continued to the screen's edges by a soft, blurred copy of the same frame */
+.ent--portrait .ent__ambient {
+  display: block;
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: blur(34px) saturate(1.05);
+  transform: scale(1.3);
+}
+.ent--portrait .ent__film {
+  inset: auto; left: 50%; top: 47%;
+  width: min(100%, 68svh); height: auto;
+  aspect-ratio: 4 / 5;
+  transform: translate(-50%, -50%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%), linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%), linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* Fine moving grain (light and dark specks, a few percent): the picture reads as film, and no gradient shows bands */
+.ent__grain {
+  position: absolute; inset: -64px;
+  pointer-events: none;
+  background-image: var(--grain);
+  background-size: 112px 112px;
+  opacity: 1;
+  animation: ent-grain 640ms steps(1) infinite;
+  transition: opacity 600ms linear;
+}
+.ent__stage.is-bright .ent__grain { opacity: 0; }
+@keyframes ent-grain {
+  0% { transform: translate(0, 0); }
+  17% { transform: translate(-31px, 17px); }
+  33% { transform: translate(23px, -41px); }
+  50% { transform: translate(-13px, 37px); }
+  67% { transform: translate(41px, 11px); }
+  83% { transform: translate(-47px, -23px); }
+}
+
+.ent__light {
+  position: absolute; inset: -10%;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 42%, #fffdf7 0, #fdf6e6 35%, var(--bg) 70%);
+}
+
+/* ── Where the stage comes to rest (the Home hero): his form in an arched window,
+      the question beneath. The picture is shown near its own size, so it stays sharp. ── */
+.ent__rest {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(1.25rem, 3.2svh, 2.4rem);
+  padding: calc(var(--nav-h) + 0.75rem) var(--gutter) max(1.75rem, 3.5svh);
+  pointer-events: none;
+}
+.ent__hero {
+  position: relative; flex: none;
+  width: min(100%, 46rem, calc((100svh - 29rem) * 4 / 3), calc(50svh * 4 / 3));
+  aspect-ratio: 4 / 3;
+}
+.ent:not(.ent--static) .ent__hero { opacity: 0; }
+/* Morning light gathered behind the window */
+.ent__hero::before {
+  content: '';
+  position: absolute; inset: -22% -30%; z-index: -1;
+  background: radial-gradient(ellipse 50% 50% at 50% 48%, rgba(246, 222, 166, 0.62) 0, rgba(248, 232, 196, 0.32) 45%, transparent 72%);
+}
+/* A fine gilt frame, standing a little off the picture */
+.ent__hero::after {
+  content: '';
+  position: absolute; inset: -11px;
+  border: 1px solid rgba(176, 128, 52, 0.38);
+  border-radius: 50% 50% 18px 18px / 42% 42% 18px 18px;
+  pointer-events: none;
+}
+.ent__arch {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  border-radius: 50% 50% 12px 12px / 40% 40% 12px 12px;
+  background: #2a1a08;
+  box-shadow: 0 0 0 1px rgba(176, 128, 52, 0.28), 0 34px 70px -34px rgba(120, 78, 20, 0.55);
+  isolation: isolate;
+}
+.ent__arch picture, .ent__arch img { display: block; width: 100%; height: 100%; }
+.ent__arch img { object-fit: cover; object-position: 50% 20%; transform-origin: 50% 30%; animation: ent-breathe 18s ease-in-out infinite alternate; }
+@keyframes ent-breathe { from { transform: scale(1); } to { transform: scale(1.035); } }
+
+/* ── Before the first scroll ── */
+.ent__welcome {
+  position: absolute; left: 0; right: 0; bottom: max(9svh, 4.5rem); z-index: 3;
+  text-align: center;
+  pointer-events: none;
+}
+.ent__welcome > * { opacity: 0; transform: translateY(8px); transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out); }
+.ent__welcome.is-on .ent__brand { opacity: 1; transform: none; transition-duration: 1400ms; }
+.ent__welcome.is-ready .ent__cue { opacity: 1; transform: none; transition-duration: 1200ms; transition-delay: 900ms; }
+.ent__brand {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 8vw, 4.2rem);
+  font-weight: 300; letter-spacing: 0.08em;
+  color: var(--ivory-text);
+  text-shadow: 0 1px 24px rgba(20, 12, 4, 0.55);
+}
+.ent__cue {
+  margin-top: 0.75rem;
+  font-family: var(--font-ui); font-size: var(--fs-label);
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--ivory-text);
+  text-shadow: 0 1px 14px rgba(20, 12, 4, 0.7);
+}
+
+/* ── Skip, from the first second to the end ── */
+.ent__skip {
+  position: absolute; right: var(--gutter); bottom: max(0.75rem, env(safe-area-inset-bottom)); z-index: 4;
+  min-height: 44px; padding: 0 0.5rem;
+  border: 0; background: none; cursor: pointer;
+  font-family: var(--font-ui); font-size: 0.8125rem; letter-spacing: 0.08em;
+  color: var(--ivory-text);
+  text-shadow: 0 1px 10px rgba(20, 12, 4, 0.8);
+  opacity: 0;
+  animation: ent-skip-in 600ms var(--ease-out) 1s forwards;
+  transition: opacity 400ms var(--ease-out);
+}
+.ent__skip.is-done { animation: none; opacity: 0; pointer-events: none; }
+@keyframes ent-skip-in { to { opacity: 0.8; } }
+
+/* ── The question ── */
+.ent__ask {
+  width: min(44rem, 100%);
+  text-align: center;
+  pointer-events: none;
+}
+.ent__ask:not(.is-on) > * { transition-duration: 420ms; transition-delay: 0ms; }
+.ent__ask.is-on { pointer-events: auto; }
+.ent__q { font-size: clamp(2rem, min(7.6vw, 5.4svh), 3.3rem); font-weight: 400; line-height: 1.1; color: var(--ink-900); }
+.ent__q em { font-style: italic; color: var(--gold-ink); }
+.ent__form { margin: 1.15rem auto 0; max-width: 36rem; }
+.ent__box {
+  display: flex; align-items: center;
+  min-height: 3.5rem;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.96);
+  border: 1px solid rgba(160, 120, 60, 0.3);
+  box-shadow: var(--shadow-2);
+  transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+.ent__box:focus-within { border-color: rgba(176, 128, 52, 0.62); box-shadow: var(--shadow-2), 0 0 0 4px rgba(217, 190, 138, 0.28); }
+.ent__box input {
+  flex: 1; min-width: 0;
+  padding: 0.9rem 0.5rem 0.9rem 1.5rem;
+  border: 0; background: none; outline: none;
+  font-family: var(--font-read); font-size: max(1.0625rem, 16px);
+  color: var(--ink-900); caret-color: var(--saffron);
+}
+.ent__box input::placeholder { color: var(--text-3); opacity: 1; }
+.ent__go {
+  flex: none; display: grid; place-items: center;
+  width: 2.75rem; height: 2.75rem; margin-right: 0.4rem;
+  border: 0; border-radius: 50%;
+  background: var(--metal); box-shadow: var(--metal-edge), var(--shadow-1);
+  color: #3d2a12; cursor: pointer; touch-action: manipulation;
+}
+.ent__go svg { width: 1.15rem; height: 1.15rem; }
+.ent__go:active { transform: scale(0.94); }
+.ent__paths {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+  margin: 1rem 0 0; padding: 0; list-style: none;
+}
+.ent__paths button {
+  min-height: 44px; padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(160, 120, 60, 0.26);
+  background: rgba(255, 253, 248, 0.86);
+  font-family: var(--font-ui); font-size: 0.875rem; color: var(--ink-700);
+  cursor: pointer; touch-action: manipulation;
+  transition: background var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out);
+}
+.ent__paths button:hover { background: #fffdf8; border-color: rgba(176, 128, 52, 0.5); }
+.ent__paths li:nth-child(n + 5) { display: none; }
+.ent__note { margin-top: 0.8rem; font-family: var(--font-ui); font-size: var(--fs-label); letter-spacing: 0.06em; color: var(--text-2); }
+
+
+/* ── Wide screens: all eight ways in ── */
+@media (min-aspect-ratio: 9/10) and (min-width: 900px) {
+  .ent__paths li:nth-child(n + 5) { display: list-item; }
+}
+
+/* ── Phones and tall windows: a taller window, centred on his face ── */
+@media (max-aspect-ratio: 9/10) {
+  .ent__hero { aspect-ratio: 4 / 5; width: min(80vw, 25rem, calc((100svh - 30rem) * 0.8)); }
+  .ent__arch { border-radius: 50% 50% 12px 12px / 34% 34% 12px 12px; }
+  .ent__hero::after { border-radius: 50% 50% 18px 18px / 36% 36% 18px 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ent__stage, .ent__grain { transition: none; }
+  .ent__grain, .ent__arch img { animation: none; }
+}
+
+/* ── Resting state (already entered, or less motion) ── */
+.ent--static { height: auto; background: var(--bg); }
+.ent--static .ent__stage { position: relative; height: auto; min-height: 100svh; }
+.ent--static .ent__rest { position: relative; min-height: 100svh; }
+.ent__replay {
+  min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; color: var(--gold-ink);
+  text-decoration: underline; text-underline-offset: 0.25em;
+}

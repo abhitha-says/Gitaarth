@@ -1,0 +1,62 @@
+{
+  "arjuna-kneeling": {
+    "src": "/img/art/arjuna-kneeling.webp",
+    "map": "/img/art/arjuna-kneeling.map.webp",
+    "w": 566,
+    "h": 600,
+    "alpha": true,
+    "focus": {
+      "x": 0.46,
+      "y": 0.19
+    },
+    "standIn": true
+  },
+  "krishna-face": {
+    "src": "/img/art/krishna-face.webp",
+    "map": "/img/art/krishna-face.map.webp",
+    "w": 592,
+    "h": 707,
+    "alpha": true,
+    "focus": {
+      "x": 0.556,
+      "y": 0.536
+    },
+    "standIn": true
+  },
+  "krishna-feet": {
+    "src": "/img/art/krishna-feet.webp",
+    "map": "/img/art/krishna-feet.map.webp",
+    "w": 750,
+    "h": 570,
+    "alpha": true,
+    "focus": {
+      "x": 0.604,
+      "y": 0.935
+    },
+    "standIn": true
+  },
+  "krishna-standing": {
+    "src": "/img/art/krishna-standing.webp",
+    "map": "/img/art/krishna-standing.map.webp",
+    "w": 820,
+    "h": 1678,
+    "alpha": true,
+    "focus": {
+      "x": 0.583,
+      "y": 0.262
+    },
+    "standIn": true
+  },
+  "rama-standing": {
+    "src": "/img/art/rama-standing.webp",
+    "map": "/img/art/rama-standing.map.webp",
+    "w": 786,
+    "h": 1500,
+    "alpha": true,
+    "focus": {
+      "x": 0.433,
+      "y": 0.276
+    },
+    "standIn": true
+  }
+}

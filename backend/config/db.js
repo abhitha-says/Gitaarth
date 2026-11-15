@@ -18,7 +18,15 @@ export async function connectDB() {
     console.log('🔗 MongoDB connected successfully');
     return true;
   } catch (err) {
+    // Do NOT exit. Chat, scripture retrieval and the prompt pipeline all have
+    // working no-DB fallbacks; killing the process here means every chat request
+    // fails and the UI silently falls back to canned replies.
     console.error('❌ MongoDB connection failed:', err.message);
-    process.exit(1);
+    console.warn('⚠️  Continuing without the database — history will not persist.');
+    return false;
   }
+}
+
+export function isDBConnected() {
+  return mongoose.connection.readyState === 1;
 }

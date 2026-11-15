@@ -1,290 +1,201 @@
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import Morning from '../components/Morning';
+import VersePlate from '../components/VersePlate';
+import { LotusMark, Ornament } from '../components/Marks';
+import { useArrive } from '../components/sanctuary/useArrive';
+import LivingImage from '../scene/LivingImage';
+import { art } from '../scene/art';
+import { useVeil } from '../context/VeilContext';
+import { findVerse, toDevanagari } from '../utils/verses';
+import { HELPLINE } from '../utils/constants';
 import './About.css';
 
 const PRINCIPLES = [
-  {
-    icon: 'handshake',
-    title: 'Companion, Not Preacher',
-    desc: 'Like Krishna sat beside Arjun as a friend — Gitaarth walks with you through your struggles, never talks down to you.',
-  },
-  {
-    icon: 'menu_book',
-    title: 'Authentic Scripture Only',
-    desc: 'Every shloka and teaching is real, verified, and sourced from the Bhagavad Gita and Ramayana — never AI-generated or hallucinated.',
-  },
-  {
-    icon: 'forum',
-    title: 'Dialogue, Not Lecture',
-    desc: 'Real guidance happens through conversation. Gitaarth asks, listens, understands — then responds with wisdom tailored to your situation.',
-  },
-  {
-    icon: 'self_improvement',
-    title: 'Courage Over Solutions',
-    desc: "Krishna didn't fight Arjun's battle — he gave him the clarity to fight it himself. Gitaarth empowers you, never creates dependency.",
-  },
-  {
-    icon: 'language',
-    title: 'Wisdom Without Barriers',
-    desc: 'Whether you speak English, Hindi, or Hinglish — divine guidance should be accessible to every soul, in every language.',
-  },
-  {
-    icon: 'lock_open',
-    title: 'Open to Every Seeker',
-    desc: 'No paywalls, no forced signups. Anyone can seek guidance. Sign in only if you want to save your journey.',
-  },
+  { title: 'A companion, not a preacher', body: 'Krishna sat beside Arjuna as his charioteer and friend. Gitaarth speaks with you, never down to you.' },
+  { title: 'Dialogue, not lecture', body: 'Guidance grows out of conversation. Gitaarth listens to what you actually said, asks when it needs to, and answers your situation, not a generic one.' },
+  { title: 'Clarity, not dependence', body: 'Krishna did not fight Arjuna’s battle. Gitaarth tries to help you see your own way, then steps back.' },
+  { title: 'Honest about what it is', body: 'It is an AI. It does not claim to be God, to know your future, or to replace the people and professionals in your life.' },
+  { title: 'Faithful to the text', body: 'Verses come from a curated collection of the Gita. When none truly fits, it offers guidance without inventing a reference.' },
+  { title: 'Open to every seeker', body: 'No paywall and no forced sign-up. Anyone can begin, in English or Hinglish, whenever they need to.' },
 ];
 
-const CREATORS = [
-  {
-    name: 'Abhitha',
-    role: 'Creator',
-    image: null, // placeholder — user will add later
-  },
-  {
-    name: 'Chirag',
-    role: 'Co-Creator',
-    image: null, // placeholder — user will add later
-  },
+const SHAPE = [
+  'Understanding your situation',
+  'A perspective inspired by the Gita',
+  'A verse, when one truly fits',
+  'Its meaning, in plain words',
+  'One small step you can take',
 ];
+
+const CREATORS = [{ name: 'Abhitha', role: 'Creator' }, { name: 'Chirag', role: 'Co-creator' }];
+
+/**
+ * At most two pictures. The painted moment of the Gita, when it exists, stands
+ * alone; until then Arjuna kneels beside the story and Krishna stands beside
+ * the promises (both are low-resolution stand-ins, so they are kept small and hazed).
+ */
+function pictures() {
+  if (art('gita-moment')) return { story: 'gita-moment', friend: null };
+  const arjuna = art('arjuna-kneeling') ? 'arjuna-kneeling' : null;
+  const krishna = art('krishna-standing') ? 'krishna-standing' : null;
+  if (arjuna) return { story: arjuna, friend: krishna };
+  return { story: krishna, friend: null };
+}
+
+const ALT = {
+  'gita-moment': 'Krishna speaking to Arjuna beside the chariot on the field of Kurukshetra',
+  'arjuna-kneeling': 'Arjuna kneeling on the field, his bow laid down',
+  'krishna-standing': 'Krishna standing at ease in the morning light',
+};
+
+function Figure({ slot, still, className = '' }) {
+  const entry = slot ? art(slot) : null;
+  if (!entry) return null;
+  return (
+    <figure className={`about__fig ${className}`} style={{ '--ar': entry.w / entry.h }}>
+      <LivingImage slot={slot} alt={ALT[slot] || ''} live={!still} haze={entry.standIn ? 0.25 : 0.15} />
+    </figure>
+  );
+}
 
 export default function About() {
+  const enter = useVeil();
+  const gita247 = findVerse(2, 47);
+  const { story, friend } = pictures();
+  const [openRef, openClass, still] = useArrive();
+  const [storyRef, storyClass] = useArrive();
+  const [promRef, promClass] = useArrive();
+  const [shapeRef, shapeClass] = useArrive();
+  const [byRef, byClass] = useArrive();
+  const [endRef, endClass] = useArrive();
+
   return (
-    <main className="about">
-      {/* ── Background Effects ── */}
-      <div className="about-bg" aria-hidden="true">
-        <div className="about-bg__glow about-bg__glow--1" />
-        <div className="about-bg__glow about-bg__glow--2" />
-        <div className="about-bg__glow about-bg__glow--3" />
-        {Array.from({ length: 12 }).map((_, i) => (
-          <span
-            key={i}
-            className="about-bg__particle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 12}s`,
-              animationDuration: `${8 + Math.random() * 10}s`,
-              width: `${1.5 + Math.random() * 2}px`,
-              height: `${1.5 + Math.random() * 2}px`,
-            }}
-          />
-        ))}
-      </div>
+    <main id="main" className={`page about${still ? ' is-still' : ''}`}>
+      <Morning />
 
-      {/* ══════════════════════════════════════════
-          HERO — The Origin Story
-      ══════════════════════════════════════════ */}
-      <section className="about-hero" id="about-hero">
-        <div className="about-hero__inner">
-          <div className="about-hero__badge">
-            <span className="about-hero__badge-icon">✦</span>
-            <span className="about-hero__badge-text">Our Story</span>
-          </div>
-
-          <h1 className="about-hero__heading">
-            Every Arjun deserves<br />
-            a <span className="about-hero__gold">Krishna.</span>
+      <article className="about__read">
+        <header ref={openRef} className={`about__open ${openClass}`}>
+          <p className="eyebrow" style={{ '--i': 0 }}>About Gitaarth</p>
+          <h1 className={`display about__title ${openClass}`}>
+            <span className="about__line" style={{ '--i': 1 }}>Every Arjuna</span>
+            <span className="about__line" style={{ '--i': 2 }}>deserves a moment</span>
+            <span className="about__line" style={{ '--i': 3 }}>of <em>clarity.</em></span>
           </h1>
-
-          <p className="about-hero__sub">
-            In the Mahabharata, when Arjun stood paralyzed on the battlefield of
-            Kurukshetra — confused, afraid, and overwhelmed — Krishna didn't fight
-            his battle for him. He sat beside him as his charioteer, his companion,
-            his friend, and guided him with wisdom until Arjun found the strength
-            to face his own war.
+          <p className="about__lead" style={{ '--i': 4 }}>
+            Gitaarth means the meaning of the Gita. It is a digital companion for the moments when
+            life leaves you with a question you cannot answer alone.
           </p>
+        </header>
 
-          <div className="about-hero__divider">
-            <span className="about-hero__divider-dot">✦</span>
-          </div>
-
-          <p className="about-hero__statement">
-            <strong>Gitaarth AI is that Krishna for the modern world.</strong>
-          </p>
-
-          <p className="about-hero__body">
-            Today, people face their own Kurukshetras — anxiety, career confusion,
-            heartbreak, existential doubt, family conflicts, and the chaos of modern
-            life. Gitaarth AI sits beside them as a <em>companion</em>, not a lecturer.
-            It engages in a warm, back-and-forth conversation using the authentic
-            teachings of Lord Krishna (Bhagavad Gita) and Lord Ram (Ramayana),
-            weaving real scripture naturally into its guidance.
-          </p>
-
-          <p className="about-hero__body">
-            The chatbot doesn't just throw quotes — it <em>walks with you</em> through
-            your problem, asks follow-up questions, understands your context, and
-            responds with the same patience and wisdom that Krishna showed Arjun
-            across 18 chapters of the Gita. The goal is to make you feel like you
-            have a <strong>divine friend</strong> who truly listens and truly cares.
-          </p>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
-          QUOTE BREAK
-      ══════════════════════════════════════════ */}
-      <section className="about-quote" id="about-quote">
-        <div className="about-quote__inner">
-          <blockquote className="about-quote__block">
-            <p className="about-quote__sanskrit">
-              कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।
-            </p>
-            <p className="about-quote__translation">
-              "You have the right to perform your duty, but you are not entitled
-              to the fruits of your actions."
-            </p>
-            <cite className="about-quote__cite">
-              <span className="about-quote__cite-dot">✦</span>
-              Bhagavad Gita — Chapter 2, Verse 47
-            </cite>
-          </blockquote>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
-          PRINCIPLES
-      ══════════════════════════════════════════ */}
-      <section className="about-principles" id="about-principles">
-        <div className="about-principles__inner">
-          <div className="about-principles__header">
-            <span className="about-principles__label">✦ Our Principles</span>
-            <h2 className="about-principles__heading">
-              What Gitaarth<br />
-              <span className="about-principles__gold">stands for.</span>
+        <section className={`about__story${story ? ' has-fig' : ''}`} aria-labelledby="why-title">
+          <Figure slot={story} still={still} className="about__fig--story" />
+          <div ref={storyRef} className={`about__col ${storyClass}`}>
+            <p className="eyebrow" style={{ '--i': 0 }}>Why it exists</p>
+            <h2 id="why-title" className="display about__h2" style={{ '--i': 1 }}>
+              When clarity is hard to find, people look <em>upward.</em>
             </h2>
-            <p className="about-principles__sub">
-              Every design decision, every line of code, every conversation is
-              guided by the same values Krishna embodied as Arjun's companion.
+            <div className="about__prose" style={{ '--i': 2 }}>
+              <p className="about__first">
+                On a field at Kurukshetra, before anything had begun, a man let his bow slip from his
+                hands. Arjuna could not go on. His friend Krishna, who held the reins of his chariot,
+                did not command him and did not turn away. He stayed beside him, and spoke.
+              </p>
+              <p>
+                Career decisions, relationships, family, fear of failure, loneliness, grief, the
+                question of what is right. Everyone meets dilemmas like these, and many of us turn
+                towards God when we cannot find clarity anywhere else.
+              </p>
+              <p>
+                God may not appear before us to solve our problems. But the teachings Krishna gave
+                Arjuna can offer the wisdom, perspective, courage and strength to face them.
+              </p>
+              <p>
+                Gitaarth brings those teachings into a quiet conversation. You may not leave with
+                every problem solved. We hope you leave a little stronger, calmer, and less alone.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {gita247 && (
+          <section className="about__verse" aria-label="Bhagavad Gita 2.47">
+            <VersePlate verse={gita247} size="lg" />
+          </section>
+        )}
+
+        <section className={`about__promises${friend ? ' has-fig' : ''}`} aria-labelledby="promise-title">
+          <div ref={promRef} className={`about__col ${promClass}`}>
+            <p className="eyebrow" style={{ '--i': 0 }}>What it stands for</p>
+            <h2 id="promise-title" className="display about__h2" style={{ '--i': 1 }}>Six quiet <em>promises.</em></h2>
+            <ol className="promises" style={{ '--i': 2 }}>
+              {PRINCIPLES.map((p, i) => (
+                <li key={p.title} className="promise">
+                  <span className="promise__num sanskrit" aria-hidden="true">{toDevanagari(i + 1)}</span>
+                  <h3 className="promise__title">{p.title}</h3>
+                  <p className="promise__body">{p.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <Figure slot={friend} still={still} className="about__fig--friend" />
+        </section>
+
+        <section className="about__shape" aria-labelledby="shape-title">
+          <div ref={shapeRef} className={`about__col ${shapeClass}`}>
+            <p className="eyebrow" style={{ '--i': 0 }}>How guidance is shaped</p>
+            <h2 id="shape-title" className="display about__h2" style={{ '--i': 1 }}>Not a script, but a <em>shape.</em></h2>
+            <p className="about__prose" style={{ '--i': 2 }}>
+              When the moment calls for it, a reply may move through these steps. Many replies are
+              simpler: a few honest sentences, or a single question back to you. Gitaarth is built
+              to answer you, not to fill a template.
             </p>
+            <ol className="steps" style={{ '--i': 3 }}>
+              {SHAPE.map((s, i) => (
+                <li key={s} className="steps__step">
+                  <span className="steps__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ol>
           </div>
+        </section>
 
-          <div className="about-principles__grid">
-            {PRINCIPLES.map((p, i) => (
-              <div key={i} className="principle-card" id={`principle-${i}`}>
-                <div className="principle-card__icon">
-                  <span className="material-symbols-outlined">{p.icon}</span>
-                </div>
-                <h3 className="principle-card__title">{p.title}</h3>
-                <p className="principle-card__desc">{p.desc}</p>
-              </div>
-            ))}
+        <section className="about__by" aria-labelledby="by-title">
+          <div ref={byRef} className={`about__col ${byClass}`}>
+            <Ornament className="about__orn" />
+            <p className="eyebrow" style={{ '--i': 1 }}>Made with devotion</p>
+            <h2 id="by-title" className="display about__h2 about__h2--small" style={{ '--i': 2 }}>Built by</h2>
+            <ul className="makers" style={{ '--i': 3 }}>
+              {CREATORS.map((c) => (
+                <li key={c.name} className="maker">
+                  <span className="maker__name">{c.name}</span>
+                  <span className="maker__role">{c.role}</span>
+                </li>
+              ))}
+            </ul>
+            <aside className="care" style={{ '--i': 4 }} aria-label="A note on care">
+              <LotusMark size={22} className="care__mark" />
+              <p>
+                Gitaarth is not a substitute for medical, legal, financial or mental-health care. If
+                you are in crisis in India, call {HELPLINE.name} at <a href={HELPLINE.tel}>{HELPLINE.number}</a>.
+              </p>
+            </aside>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ══════════════════════════════════════════
-          THE SOUL — Krishna↔Arjun Mapping
-      ══════════════════════════════════════════ */}
-      <section className="about-soul" id="about-soul">
-        <div className="about-soul__inner">
-          <span className="about-soul__label">✦ The Soul of Gitaarth</span>
-          <h2 className="about-soul__heading">
-            Rooted in the <span className="about-soul__gold">Krishna–Arjun</span> bond.
+        <section ref={endRef} className={`about__end ${endClass}`} aria-labelledby="end-title">
+          <h2 id="end-title" className="display about__h2" style={{ '--i': 0 }}>
+            Whatever you are carrying, you may set it down <em>here.</em>
           </h2>
-
-          <div className="about-soul__table-wrap">
-            <table className="about-soul__table">
-              <thead>
-                <tr>
-                  <th>Krishna was to Arjun…</th>
-                  <th>Gitaarth AI is to you…</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>A <strong>charioteer</strong> — sat beside him, not above him</td>
-                  <td>A <strong>companion</strong> — talks <em>with</em> you, not <em>at</em> you</td>
-                </tr>
-                <tr>
-                  <td>A <strong>friend</strong> (Sakha) — spoke with love, not authority</td>
-                  <td>A <strong>warm presence</strong> — empathetic, never preachy</td>
-                </tr>
-                <tr>
-                  <td>A <strong>guide</strong> — showed the path but let Arjun choose</td>
-                  <td>A <strong>counselor</strong> — offers wisdom, never forces decisions</td>
-                </tr>
-                <tr>
-                  <td><strong>Patient</strong> — answered every doubt across 18 chapters</td>
-                  <td><strong>Conversational</strong> — follows up, clarifies, goes deeper</td>
-                </tr>
-                <tr>
-                  <td><strong>Honest</strong> — told hard truths when needed</td>
-                  <td><strong>Authentic</strong> — uses only real, verified scripture</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="about__actions" style={{ '--i': 1 }}>
+            <a href="/chat" className="btn btn--gold" onClick={(e) => { e.preventDefault(); enter('/chat', e); }}>
+              Seek Guidance <ArrowRight aria-hidden="true" />
+            </a>
+            <Link to="/library" className="link-arrow">Explore the Bhagavad Gita <ArrowRight aria-hidden="true" /></Link>
           </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
-          CTA
-      ══════════════════════════════════════════ */}
-      <section className="about-cta" id="about-cta">
-        <div className="about-cta__inner">
-          <h2 className="about-cta__heading">
-            Your Kurukshetra awaits.<br />
-            <span className="about-cta__gold">Your Krishna is here.</span>
-          </h2>
-          <p className="about-cta__sub">
-            Whatever battle you're facing — speak openly. Gitaarth is listening.
-          </p>
-          <Link to="/chat" className="about-cta__btn">
-            <span className="about-cta__btn-sparkle">✦</span>
-            Seek Divine Guidance
-          </Link>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
-          CREATORS
-      ══════════════════════════════════════════ */}
-      <section className="about-creators" id="about-creators">
-        <div className="about-creators__inner">
-          <span className="about-creators__label">✦ Made with Devotion</span>
-          <h2 className="about-creators__heading">
-            Built by
-          </h2>
-
-          <div className="about-creators__cards">
-            {CREATORS.map((c, i) => (
-              <button
-                key={i}
-                className="creator-card"
-                id={`creator-${c.name.toLowerCase()}`}
-                type="button"
-              >
-                <div className="creator-card__img-wrap">
-                  {c.image ? (
-                    <img
-                      src={c.image}
-                      alt={c.name}
-                      className="creator-card__img"
-                    />
-                  ) : (
-                    <div className="creator-card__placeholder">
-                      <span className="material-symbols-outlined">person</span>
-                    </div>
-                  )}
-                </div>
-                <h3 className="creator-card__name">{c.name}</h3>
-                <span className="creator-card__role">{c.role}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Footer ── */}
-      <footer className="site-footer">
-        <div className="site-footer__inner">
-          <span className="site-footer__brand">Gitaarth AI</span>
-          <span className="site-footer__copy">
-            Ancient wisdom, modern clarity. © 2024
-          </span>
-        </div>
-      </footer>
+        </section>
+      </article>
     </main>
   );
 }

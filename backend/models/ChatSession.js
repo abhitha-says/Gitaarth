@@ -18,6 +18,14 @@ const chatSessionSchema = new mongoose.Schema(
       default: null,
       index: true,
     },
+    /* Stable owner key ("user:<id>" | "guest:<uuid>") — the same key long-term
+       memory is filed under, so a conversation list and the memories behind it
+       can never drift apart. */
+    ownerKey: {
+      type: String,
+      default: null,
+      index: true,
+    },
     language: {
       type: String,
       enum: ['en', 'hi'],
@@ -52,6 +60,8 @@ const chatSessionSchema = new mongoose.Schema(
 /* ─── Indexes ─── */
 chatSessionSchema.index({ updatedAt: -1 });
 chatSessionSchema.index({ userId: 1, isArchived: 1, updatedAt: -1 });
+// Sidebar query: this person's live conversations, newest first.
+chatSessionSchema.index({ ownerKey: 1, isArchived: 1, updatedAt: -1 });
 
 const ChatSession = mongoose.model('ChatSession', chatSessionSchema);
 export default ChatSession;

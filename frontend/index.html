@@ -3,10 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Gitaarth AI — Ancient Wisdom for Modern Problems. Seek divine guidance from Lord Krishna (Bhagavad Gita) and Lord Ram (Ramayana) through an AI-powered spiritual chatbot." />
-    <meta name="theme-color" content="#07060e" />
-    <title>Gitaarth AI — Ancient Wisdom for Modern Problems</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Gitaarth is an AI companion inspired by the timeless teachings of the Bhagavad Gita. Share what is on your mind and discover a perspective that helps you move forward." />
+    <meta name="theme-color" content="#fbf7ee" />
+    <meta property="og:title" content="Gitaarth — Wisdom of the Bhagavad Gita" />
+    <meta property="og:description" content="When life leaves you with questions, let timeless wisdom guide you towards clarity." />
+    <meta property="og:image" content="/img/vishwaroop-wide.webp" />
+    <title>Gitaarth — Wisdom of the Bhagavad Gita</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+    />
+    <!-- First visit to Home this session: start dark, so the entrance never flashes ivory before the film -->
+    <script>
+      (function () {
+        try {
+          var q = new URLSearchParams(location.search).get('tier');
+          var still = q === 'still' || (q !== 'full' && q !== 'lighter' && matchMedia('(prefers-reduced-motion: reduce)').matches);
+          if (location.pathname === '/' && !still && sessionStorage.getItem('gitaarth:entered') !== '1') document.documentElement.dataset.intro = 'on';
+        } catch (e) { /* private mode: the page simply starts light */ }
+      })();
+    </script>
+    <style>html[data-intro='on'], html[data-intro='on'] body { background: #020101; }</style>
   </head>
   <body>
     <div id="root"></div>
